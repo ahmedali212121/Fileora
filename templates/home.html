@@ -1,392 +1,200 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fileora</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+    <title>Docora - أدوات PDF والمستندات</title>
 
-body{
-    font-family:Arial,Tahoma,sans-serif;
-    background:#181a1b;
-    color:#f1f5f9;
-    min-height:100vh;
-}
+    <meta name="description"
+          content="Docora - أدوات مجانية وسهلة لتحويل ودمج وتقسيم وضغط ملفات PDF والمستندات.">
 
-.navbar{
-    height:70px;
-    background:#17191a;
-    border-bottom:1px solid #292d31;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 6%;
-}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-.logo{
-    color:#3b82f6;
-    font-size:25px;
-    font-weight:bold;
-}
+        body {
+            font-family: Arial, Tahoma, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            min-height: 100vh;
+        }
 
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:18px;
-}
+        header {
+            padding: 22px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #1e293b;
+        }
 
-.nav-links a{
-    color:#d1d5db;
-    text-decoration:none;
-    font-size:14px;
-}
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: #60a5fa;
+            text-decoration: none;
+        }
 
-.nav-links a:hover{
-    color:#3b82f6;
-}
+        .hero {
+            text-align: center;
+            padding: 80px 20px 50px;
+        }
 
-.language-btn{
-    border:1px solid #30353a;
-    background:#202326;
-    color:#d1d5db;
-    padding:9px 15px;
-    border-radius:9px;
-    cursor:pointer;
-    font-size:14px;
-}
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 18px;
+        }
 
-.language-btn:hover{
-    background:#2563eb;
-    color:white;
-}
+        .hero h1 span {
+            color: #60a5fa;
+        }
 
-.hero{
-    max-width:1000px;
-    margin:auto;
-    padding:85px 20px 55px;
-    text-align:center;
-}
+        .hero p {
+            color: #cbd5e1;
+            font-size: 19px;
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.8;
+        }
 
-.hero-icon{
-    width:90px;
-    height:90px;
-    margin:0 auto 25px;
-    border-radius:25px;
-    background:#202326;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:45px;
-}
+        .tools {
+            width: 86%;
+            max-width: 1100px;
+            margin: 20px auto 80px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
 
-.hero h1{
-    font-size:52px;
-    margin-bottom:18px;
-}
+        .tool {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 18px;
+            padding: 28px 22px;
+            text-decoration: none;
+            color: white;
+            transition: 0.2s;
+        }
 
-.hero h1 span{
-    color:#3b82f6;
-}
+        .tool:hover {
+            transform: translateY(-5px);
+            border-color: #60a5fa;
+            background: #24344d;
+        }
 
-.hero p{
-    max-width:650px;
-    margin:auto;
-    color:#9ca3af;
-    font-size:18px;
-    line-height:1.8;
-}
+        .icon {
+            font-size: 38px;
+            margin-bottom: 16px;
+        }
 
-.tools{
-    max-width:1100px;
-    margin:auto;
-    padding:20px;
-}
+        .tool h2 {
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
 
-.tools-title{
-    text-align:center;
-    font-size:28px;
-    margin-bottom:30px;
-}
+        .tool p {
+            color: #94a3b8;
+            line-height: 1.7;
+            font-size: 14px;
+        }
 
-.tools-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
+        footer {
+            border-top: 1px solid #1e293b;
+            text-align: center;
+            padding: 30px 20px;
+            color: #64748b;
+        }
 
-.tool-card{
-    background:#1c1f21;
-    border:1px solid #262a2e;
-    border-radius:20px;
-    padding:28px;
-    transition:.2s;
-}
+        @media (max-width: 600px) {
+            .hero {
+                padding-top: 55px;
+            }
 
-.tool-card:hover{
-    transform:translateY(-5px);
-    border-color:#2563eb;
-    background:#202326;
-}
+            .hero h1 {
+                font-size: 36px;
+            }
 
-.tool-icon{
-    width:55px;
-    height:55px;
-    border-radius:15px;
-    background:#202a3a;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-    margin-bottom:18px;
-}
+            .hero p {
+                font-size: 16px;
+            }
 
-.tool-card h3{
-    font-size:20px;
-    margin-bottom:10px;
-}
-
-.tool-card p{
-    color:#9ca3af;
-    font-size:14px;
-    line-height:1.7;
-    margin-bottom:20px;
-}
-
-.tool-button{
-    display:block;
-    text-align:center;
-    background:#2563eb;
-    color:white;
-    padding:12px;
-    border-radius:10px;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-.tool-button:hover{
-    background:#1d4ed8;
-}
-
-.info{
-    max-width:1000px;
-    margin:60px auto 0;
-    padding:20px;
-}
-
-.info-box{
-    background:#1c1f21;
-    border:1px solid #262a2e;
-    border-radius:20px;
-    padding:30px;
-    text-align:center;
-}
-
-.info-box h2{
-    margin-bottom:12px;
-}
-
-.info-box p{
-    color:#9ca3af;
-    line-height:1.8;
-}
-
-footer{
-    text-align:center;
-    color:#6b7280;
-    padding:50px 20px 30px;
-}
-
-@media(max-width:800px){
-
-    .nav-links a{
-        display:none;
-    }
-
-    .hero{
-        padding-top:60px;
-    }
-
-    .hero h1{
-        font-size:38px;
-    }
-
-    .tools-grid{
-        grid-template-columns:1fr;
-    }
-}
-</style>
-
+            .tools {
+                width: 92%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<nav class="navbar">
-
-<div class="logo">
-📄 Fileora
-</div>
-
-<div class="nav-links">
-
-<a href="/pdf-to-word">PDF إلى Word</a>
-
-<a href="/word-to-pdf">Word إلى PDF</a>
-
-<a href="/merge-pdf">دمج PDF</a>
-
-<a href="/compress-pdf">ضغط PDF</a>
-
-<a href="/split-pdf">تقسيم PDF</a>
-
-<button
-class="language-btn"
-id="languageBtn"
-onclick="toggleLanguage()">
-English
-</button>
-
-</div>
-
-</nav>
+<header>
+    <a href="/" class="logo">Docora</a>
+</header>
 
 <section class="hero">
 
-<div class="hero-icon">
-📄
-</div>
+    <h1>
+        أدوات ملفاتك مع
+        <span>Docora</span>
+    </h1>
 
-<h1>
-أدوات الملفات مع
-<span>Fileora</span>
-</h1>
-
-<p>
-مجموعة بسيطة وسريعة من أدوات PDF
-لتحويل الملفات وضغطها ودمجها وتقسيمها بسهولة.
-</p>
+    <p>
+        أدوات بسيطة وسريعة لتحويل ملفات PDF والمستندات
+        ودمجها وتقسيمها وضغطها بسهولة.
+    </p>
 
 </section>
 
 <section class="tools">
 
-<h2 class="tools-title">
-اختر الأداة التي تحتاجها
-</h2>
+    <a href="/pdf-to-word" class="tool">
+        <div class="icon">📄</div>
+        <h2>PDF إلى Word</h2>
+        <p>
+            حوّل ملفات PDF إلى مستندات Word بسهولة.
+        </p>
+    </a>
 
-<div class="tools-grid">
+    <a href="/word-to-pdf" class="tool">
+        <div class="icon">📝</div>
+        <h2>Word إلى PDF</h2>
+        <p>
+            حوّل مستندات Word إلى ملفات PDF.
+        </p>
+    </a>
 
-<div class="tool-card">
+    <a href="/merge-pdf" class="tool">
+        <div class="icon">📚</div>
+        <h2>دمج PDF</h2>
+        <p>
+            اجمع عدة ملفات PDF في ملف واحد.
+        </p>
+    </a>
 
-<div class="tool-icon">📄</div>
+    <a href="/split-pdf" class="tool">
+        <div class="icon">✂️</div>
+        <h2>تقسيم PDF</h2>
+        <p>
+            استخرج الصفحات التي تحتاجها من ملف PDF.
+        </p>
+    </a>
 
-<h3>PDF إلى Word</h3>
-
-<p>
-حوّل ملفات PDF إلى مستندات Word قابلة للتعديل.
-</p>
-
-<a href="/pdf-to-word" class="tool-button">
-استخدام الأداة
-</a>
-
-</div>
-
-<div class="tool-card">
-
-<div class="tool-icon">📝</div>
-
-<h3>Word إلى PDF</h3>
-
-<p>
-حوّل مستندات Word إلى ملفات PDF بسهولة.
-</p>
-
-<a href="/word-to-pdf" class="tool-button">
-استخدام الأداة
-</a>
-
-</div>
-
-<div class="tool-card">
-
-<div class="tool-icon">📚</div>
-
-<h3>دمج PDF</h3>
-
-<p>
-اجمع عدة ملفات PDF في ملف واحد.
-</p>
-
-<a href="/merge-pdf" class="tool-button">
-استخدام الأداة
-</a>
-
-</div>
-
-<div class="tool-card">
-
-<div class="tool-icon">🗜️</div>
-
-<h3>ضغط PDF</h3>
-
-<p>
-قلل حجم ملفات PDF بسهولة.
-</p>
-
-<a href="/compress-pdf" class="tool-button">
-استخدام الأداة
-</a>
-
-</div>
-
-<div class="tool-card">
-
-<div class="tool-icon">✂️</div>
-
-<h3>تقسيم PDF</h3>
-
-<p>
-استخرج الصفحات التي تحتاجها من ملف PDF.
-</p>
-
-<a href="/split-pdf" class="tool-button">
-استخدام الأداة
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="info">
-
-<div class="info-box">
-
-<h2>لماذا Fileora؟</h2>
-
-<p>
-واجهة بسيطة وأدوات واضحة لتحويل ملفاتك
-بدون خطوات معقدة.
-</p>
-
-</div>
+    <a href="/compress-pdf" class="tool">
+        <div class="icon">🗜️</div>
+        <h2>ضغط PDF</h2>
+        <p>
+            قلل حجم ملفات PDF لتسهيل مشاركتها ورفعها.
+        </p>
+    </a>
 
 </section>
 
 <footer>
-© 2026 Fileora
+    © 2026 Docora — جميع الحقوق محفوظة
 </footer>
 
-<script src="{{ url_for('static', filename='language.js') }}"></script>
-
 </body>
-
 </html>
