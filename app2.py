@@ -19,10 +19,7 @@ def home():
     return render_template("home.html")
 
 
-# =========================
 # PDF إلى Word
-# =========================
-
 @app.route("/pdf-to-word", methods=["GET", "POST"])
 def pdf_to_word():
 
@@ -56,10 +53,10 @@ def pdf_to_word():
             converter.convert(docx_path)
             converter.close()
 
-            return render_template(
-                "result.html",
-                filename="Fileora.docx",
-                download_url="/download/" + file_id + ".docx"
+            return send_file(
+                docx_path,
+                as_attachment=True,
+                download_name="Fileora.docx"
             )
 
         except Exception as e:
@@ -73,10 +70,7 @@ def pdf_to_word():
     return render_template("pdf_to_word.html")
 
 
-# =========================
 # Word إلى PDF
-# =========================
-
 @app.route("/word-to-pdf", methods=["GET", "POST"])
 def word_to_pdf():
 
@@ -97,7 +91,11 @@ def word_to_pdf():
 
         file_id = str(uuid.uuid4())
 
-        extension = ".docx" if filename.endswith(".docx") else ".doc"
+        extension = (
+            ".docx"
+            if filename.endswith(".docx")
+            else ".doc"
+        )
 
         word_path = os.path.join(
             UPLOAD_FOLDER,
@@ -115,10 +113,10 @@ def word_to_pdf():
 
             convert(word_path, pdf_path)
 
-            return render_template(
-                "result.html",
-                filename="Fileora.pdf",
-                download_url="/download/" + file_id + ".pdf"
+            return send_file(
+                pdf_path,
+                as_attachment=True,
+                download_name="Fileora.pdf"
             )
 
         except Exception as e:
@@ -132,10 +130,7 @@ def word_to_pdf():
     return render_template("word_to_pdf.html")
 
 
-# =========================
 # دمج PDF
-# =========================
-
 @app.route("/merge-pdf", methods=["GET", "POST"])
 def merge_pdf():
 
@@ -144,7 +139,8 @@ def merge_pdf():
         files = request.files.getlist("pdf_files")
 
         files = [
-            file for file in files
+            file
+            for file in files
             if file and file.filename != ""
         ]
 
@@ -159,13 +155,15 @@ def merge_pdf():
 
             for index, file in enumerate(files):
 
+                if not file.filename.lower().endswith(".pdf"):
+                    return "جميع الملفات يجب أن تكون PDF"
+
                 path = os.path.join(
                     UPLOAD_FOLDER,
                     f"{file_id}_{index}.pdf"
                 )
 
                 file.save(path)
-
                 pdf_files.append(path)
 
             output_path = os.path.join(
@@ -183,10 +181,10 @@ def merge_pdf():
 
             writer.close()
 
-            return render_template(
-                "result.html",
-                filename="Fileora-Merged.pdf",
-                download_url="/download/" + file_id + "_merged.pdf"
+            return send_file(
+                output_path,
+                as_attachment=True,
+                download_name="Fileora-Merged.pdf"
             )
 
         except Exception as e:
@@ -200,10 +198,7 @@ def merge_pdf():
     return render_template("merge_pdf.html")
 
 
-# =========================
 # ضغط PDF
-# =========================
-
 @app.route("/compress-pdf", methods=["GET", "POST"])
 def compress_pdf():
 
@@ -251,10 +246,10 @@ def compress_pdf():
             with open(output_path, "wb") as output_file:
                 writer.write(output_file)
 
-            return render_template(
-                "result.html",
-                filename="Fileora-Compressed.pdf",
-                download_url="/download/" + file_id + "_compressed.pdf"
+            return send_file(
+                output_path,
+                as_attachment=True,
+                download_name="Fileora-Compressed.pdf"
             )
 
         except Exception as e:
@@ -268,10 +263,7 @@ def compress_pdf():
     return render_template("compress_pdf.html")
 
 
-# =========================
 # تقسيم PDF
-# =========================
-
 @app.route("/split-pdf", methods=["GET", "POST"])
 def split_pdf():
 
@@ -293,7 +285,7 @@ def split_pdf():
             start_page = int(start_page)
             end_page = int(end_page)
 
-        except:
+        except (TypeError, ValueError):
 
             return "أدخل أرقام صفحات صحيحة"
 
@@ -316,7 +308,10 @@ def split_pdf():
             total_pages = len(reader.pages)
 
             if end_page > total_pages:
-                return f"الملف يحتوي على {total_pages} صفحات فقط"
+                return (
+                    f"الملف يحتوي على "
+                    f"{total_pages} صفحات فقط"
+                )
 
             output_path = os.path.join(
                 OUTPUT_FOLDER,
@@ -337,10 +332,10 @@ def split_pdf():
             with open(output_path, "wb") as output_file:
                 writer.write(output_file)
 
-            return render_template(
-                "result.html",
-                filename="Fileora-Split.pdf",
-                download_url="/download/" + file_id + "_split.pdf"
+            return send_file(
+                output_path,
+                as_attachment=True,
+                download_name="Fileora-Split.pdf"
             )
 
         except Exception as e:
@@ -354,30 +349,8 @@ def split_pdf():
     return render_template("split_pdf.html")
 
 
-# =========================
-# تحميل الملفات
-# =========================
-
-@app.route("/download/<filename>")
-def download_file(filename):
-
-    file_path = os.path.join(
-        OUTPUT_FOLDER,
-        filename
-    )
-
-    if not os.path.exists(file_path):
-        return "الملف غير موجود"
-
-    return send_file(
-        file_path,
-        as_attachment=True
-    )
-
-
-# =========================
-# تشغيل البرنامج
-# =========================
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000))
+    )
