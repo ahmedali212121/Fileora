@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -8,6 +10,12 @@
 
     <meta name="description"
           content="Docora - أدوات مجانية وسهلة لتحويل ودمج وتقسيم وضغط ملفات PDF والمستندات.">
+
+    <!-- Google AdSense -->
+    <script async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5168430877675005"
+        crossorigin="anonymous">
+    </script>
 
     <style>
         * {
@@ -60,6 +68,18 @@
             line-height: 1.8;
         }
 
+        /*
+         * مساحة الإعلان
+         * ستستخدمها Google AdSense عند تفعيل Auto ads
+         */
+        .ad-container {
+            width: 86%;
+            max-width: 1100px;
+            margin: 20px auto 35px;
+            min-height: 90px;
+            text-align: center;
+        }
+
         .tools {
             width: 86%;
             max-width: 1100px;
@@ -109,6 +129,7 @@
         }
 
         @media (max-width: 600px) {
+
             .hero {
                 padding-top: 55px;
             }
@@ -124,77 +145,132 @@
             .tools {
                 width: 92%;
             }
+
+            .ad-container {
+                width: 92%;
+            }
         }
     </style>
+
 </head>
 
 <body>
 
-<header>
-    <a href="/" class="logo">Docora</a>
-</header>
+    <!-- Header -->
+    <header>
+        <a href="/" class="logo">Docora</a>
+    </header>
 
-<section class="hero">
 
-    <h1>
-        أدوات ملفاتك مع
-        <span>Docora</span>
-    </h1>
+    <!-- الصفحة الرئيسية -->
+    <main>
 
-    <p>
-        أدوات بسيطة وسريعة لتحويل ملفات PDF والمستندات
-        ودمجها وتقسيمها وضغطها بسهولة.
-    </p>
+        <!-- Hero -->
+        <section class="hero">
 
-</section>
+            <h1>
+                أدوات ملفاتك مع
+                <span>Docora</span>
+            </h1>
 
-<section class="tools">
+            <p>
+                أدوات بسيطة وسريعة لتحويل ملفات PDF والمستندات
+                ودمجها وتقسيمها وضغطها بسهولة.
+            </p>
 
-    <a href="/pdf-to-word" class="tool">
-        <div class="icon">📄</div>
-        <h2>PDF إلى Word</h2>
+        </section>
+
+
+        <!-- Google AdSense -->
+        <div class="ad-container">
+            <!--
+                Google AdSense Auto ads
+                يتم التحكم بالإعلانات من لوحة AdSense
+            -->
+        </div>
+
+
+        <!-- الأدوات -->
+        <section class="tools">
+
+            <a href="/pdf-to-word" class="tool">
+
+                <div class="icon">📄</div>
+
+                <h2>PDF إلى Word</h2>
+
+                <p>
+                    حوّل ملفات PDF إلى مستندات Word بسهولة.
+                </p>
+
+            </a>
+
+
+            <a href="/word-to-pdf" class="tool">
+
+                <div class="icon">📝</div>
+
+                <h2>Word إلى PDF</h2>
+
+                <p>
+                    حوّل مستندات Word إلى ملفات PDF.
+                </p>
+
+            </a>
+
+
+            <a href="/merge-pdf" class="tool">
+
+                <div class="icon">📚</div>
+
+                <h2>دمج PDF</h2>
+
+                <p>
+                    اجمع عدة ملفات PDF في ملف واحد.
+                </p>
+
+            </a>
+
+
+            <a href="/split-pdf" class="tool">
+
+                <div class="icon">✂️</div>
+
+                <h2>تقسيم PDF</h2>
+
+                <p>
+                    استخرج الصفحات التي تحتاجها من ملف PDF.
+                </p>
+
+            </a>
+
+
+            <a href="/compress-pdf" class="tool">
+
+                <div class="icon">🗜️</div>
+
+                <h2>ضغط PDF</h2>
+
+                <p>
+                    قلل حجم ملفات PDF لتسهيل مشاركتها ورفعها.
+                </p>
+
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
         <p>
-            حوّل ملفات PDF إلى مستندات Word بسهولة.
+            © 2026 Docora - جميع الحقوق محفوظة
         </p>
-    </a>
 
-    <a href="/word-to-pdf" class="tool">
-        <div class="icon">📝</div>
-        <h2>Word إلى PDF</h2>
-        <p>
-            حوّل مستندات Word إلى ملفات PDF.
-        </p>
-    </a>
-
-    <a href="/merge-pdf" class="tool">
-        <div class="icon">📚</div>
-        <h2>دمج PDF</h2>
-        <p>
-            اجمع عدة ملفات PDF في ملف واحد.
-        </p>
-    </a>
-
-    <a href="/split-pdf" class="tool">
-        <div class="icon">✂️</div>
-        <h2>تقسيم PDF</h2>
-        <p>
-            استخرج الصفحات التي تحتاجها من ملف PDF.
-        </p>
-    </a>
-
-    <a href="/compress-pdf" class="tool">
-        <div class="icon">🗜️</div>
-        <h2>ضغط PDF</h2>
-        <p>
-            قلل حجم ملفات PDF لتسهيل مشاركتها ورفعها.
-        </p>
-    </a>
-
-</section>
-
-<footer>
-    © 2026 Docora — جميع الحقوق محفوظة
-</footer>
+    </footer>
 
 </body>
+
 </html>
