@@ -1,0 +1,383 @@
+from flask import Flask, request, send_file, render_template
+from pdf2docx import Converter
+from docx2pdf import convert
+from pypdf import PdfWriter, PdfReader
+import os
+import uuid
+
+app = Flask(__name__)
+
+UPLOAD_FOLDER = "uploads"
+OUTPUT_FOLDER = "outputs"
+
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+
+
+@app.route("/")
+def home():
+    return render_template("home.html")
+
+
+# =========================
+# PDF إلى Word
+# =========================
+
+@app.route("/pdf-to-word", methods=["GET", "POST"])
+def pdf_to_word():
+
+    if request.method == "POST":
+
+        file = request.files.get("pdf_file")
+
+        if not file or file.filename == "":
+            return "لم يتم اختيار ملف PDF"
+
+        if not file.filename.lower().endswith(".pdf"):
+            return "يرجى اختيار ملف PDF فقط"
+
+        file_id = str(uuid.uuid4())
+
+        pdf_path = os.path.join(
+            UPLOAD_FOLDER,
+            file_id + ".pdf"
+        )
+
+        docx_path = os.path.join(
+            OUTPUT_FOLDER,
+            file_id + ".docx"
+        )
+
+        file.save(pdf_path)
+
+        try:
+
+            converter = Converter(pdf_path)
+            converter.convert(docx_path)
+            converter.close()
+
+            return render_template(
+                "result.html",
+                filename="Fileora.docx",
+                download_url="/download/" + file_id + ".docx"
+            )
+
+        except Exception as e:
+
+            return f"""
+            <h2>حدث خطأ</h2>
+            <p>{e}</p>
+            <a href="/pdf-to-word">العودة</a>
+            """
+
+    return render_template("pdf_to_word.html")
+
+
+# =========================
+# Word إلى PDF
+# =========================
+
+@app.route("/word-to-pdf", methods=["GET", "POST"])
+def word_to_pdf():
+
+    if request.method == "POST":
+
+        file = request.files.get("word_file")
+
+        if not file or file.filename == "":
+            return "لم يتم اختيار ملف Word"
+
+        filename = file.filename.lower()
+
+        if not (
+            filename.endswith(".docx")
+            or filename.endswith(".doc")
+        ):
+            return "يرجى اختيار ملف Word فقط"
+
+        file_id = str(uuid.uuid4())
+
+        extension = ".docx" if filename.endswith(".docx") else ".doc"
+
+        word_path = os.path.join(
+            UPLOAD_FOLDER,
+            file_id + extension
+        )
+
+        pdf_path = os.path.join(
+            OUTPUT_FOLDER,
+            file_id + ".pdf"
+        )
+
+        file.save(word_path)
+
+        try:
+
+            convert(word_path, pdf_path)
+
+            return render_template(
+                "result.html",
+                filename="Fileora.pdf",
+                download_url="/download/" + file_id + ".pdf"
+            )
+
+        except Exception as e:
+
+            return f"""
+            <h2>حدث خطأ أثناء التحويل</h2>
+            <p>{e}</p>
+            <a href="/word-to-pdf">العودة</a>
+            """
+
+    return render_template("word_to_pdf.html")
+
+
+# =========================
+# دمج PDF
+# =========================
+
+@app.route("/merge-pdf", methods=["GET", "POST"])
+def merge_pdf():
+
+    if request.method == "POST":
+
+        files = request.files.getlist("pdf_files")
+
+        files = [
+            file for file in files
+            if file and file.filename != ""
+        ]
+
+        if len(files) < 2:
+            return "اختر ملفين PDF على الأقل"
+
+        file_id = str(uuid.uuid4())
+
+        pdf_files = []
+
+        try:
+
+            for index, file in enumerate(files):
+
+                path = os.path.join(
+                    UPLOAD_FOLDER,
+                    f"{file_id}_{index}.pdf"
+                )
+
+                file.save(path)
+
+                pdf_files.append(path)
+
+            output_path = os.path.join(
+                OUTPUT_FOLDER,
+                file_id + "_merged.pdf"
+            )
+
+            writer = PdfWriter()
+
+            for pdf_path in pdf_files:
+                writer.append(pdf_path)
+
+            with open(output_path, "wb") as output_file:
+                writer.write(output_file)
+
+            writer.close()
+
+            return render_template(
+                "result.html",
+                filename="Fileora-Merged.pdf",
+                download_url="/download/" + file_id + "_merged.pdf"
+            )
+
+        except Exception as e:
+
+            return f"""
+            <h2>حدث خطأ أثناء الدمج</h2>
+            <p>{e}</p>
+            <a href="/merge-pdf">العودة</a>
+            """
+
+    return render_template("merge_pdf.html")
+
+
+# =========================
+# ضغط PDF
+# =========================
+
+@app.route("/compress-pdf", methods=["GET", "POST"])
+def compress_pdf():
+
+    if request.method == "POST":
+
+        file = request.files.get("pdf_file")
+
+        if not file or file.filename == "":
+            return "لم يتم اختيار ملف PDF"
+
+        if not file.filename.lower().endswith(".pdf"):
+            return "يرجى اختيار ملف PDF"
+
+        file_id = str(uuid.uuid4())
+
+        input_path = os.path.join(
+            UPLOAD_FOLDER,
+            file_id + "_original.pdf"
+        )
+
+        output_path = os.path.join(
+            OUTPUT_FOLDER,
+            file_id + "_compressed.pdf"
+        )
+
+        file.save(input_path)
+
+        try:
+
+            reader = PdfReader(input_path)
+
+            writer = PdfWriter()
+
+            for page in reader.pages:
+
+                try:
+                    page.compress_content_streams()
+                except Exception:
+                    pass
+
+                writer.add_page(page)
+
+            writer.add_metadata({})
+
+            with open(output_path, "wb") as output_file:
+                writer.write(output_file)
+
+            return render_template(
+                "result.html",
+                filename="Fileora-Compressed.pdf",
+                download_url="/download/" + file_id + "_compressed.pdf"
+            )
+
+        except Exception as e:
+
+            return f"""
+            <h2>حدث خطأ أثناء الضغط</h2>
+            <p>{e}</p>
+            <a href="/compress-pdf">العودة</a>
+            """
+
+    return render_template("compress_pdf.html")
+
+
+# =========================
+# تقسيم PDF
+# =========================
+
+@app.route("/split-pdf", methods=["GET", "POST"])
+def split_pdf():
+
+    if request.method == "POST":
+
+        file = request.files.get("pdf_file")
+
+        start_page = request.form.get("start_page")
+        end_page = request.form.get("end_page")
+
+        if not file or file.filename == "":
+            return "لم يتم اختيار ملف PDF"
+
+        if not file.filename.lower().endswith(".pdf"):
+            return "يرجى اختيار ملف PDF فقط"
+
+        try:
+
+            start_page = int(start_page)
+            end_page = int(end_page)
+
+        except:
+
+            return "أدخل أرقام صفحات صحيحة"
+
+        if start_page < 1 or end_page < start_page:
+            return "نطاق الصفحات غير صحيح"
+
+        file_id = str(uuid.uuid4())
+
+        input_path = os.path.join(
+            UPLOAD_FOLDER,
+            file_id + ".pdf"
+        )
+
+        file.save(input_path)
+
+        try:
+
+            reader = PdfReader(input_path)
+
+            total_pages = len(reader.pages)
+
+            if end_page > total_pages:
+                return f"الملف يحتوي على {total_pages} صفحات فقط"
+
+            output_path = os.path.join(
+                OUTPUT_FOLDER,
+                file_id + "_split.pdf"
+            )
+
+            writer = PdfWriter()
+
+            for page_number in range(
+                start_page - 1,
+                end_page
+            ):
+
+                writer.add_page(
+                    reader.pages[page_number]
+                )
+
+            with open(output_path, "wb") as output_file:
+                writer.write(output_file)
+
+            return render_template(
+                "result.html",
+                filename="Fileora-Split.pdf",
+                download_url="/download/" + file_id + "_split.pdf"
+            )
+
+        except Exception as e:
+
+            return f"""
+            <h2>حدث خطأ أثناء تقسيم PDF</h2>
+            <p>{e}</p>
+            <a href="/split-pdf">العودة</a>
+            """
+
+    return render_template("split_pdf.html")
+
+
+# =========================
+# تحميل الملفات
+# =========================
+
+@app.route("/download/<filename>")
+def download_file(filename):
+
+    file_path = os.path.join(
+        OUTPUT_FOLDER,
+        filename
+    )
+
+    if not os.path.exists(file_path):
+        return "الملف غير موجود"
+
+    return send_file(
+        file_path,
+        as_attachment=True
+    )
+
+
+# =========================
+# تشغيل البرنامج
+# =========================
+
+if __name__ == "__main__":
+    app.run(debug=True)

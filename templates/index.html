@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fileora | PDF to Word</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>📄 Fileora</h1>
+
+    <h2>تحويل PDF إلى Word</h2>
+
+    <p>حوّل ملفات PDF إلى Word بسهولة وسرعة.</p>
+
+    <form id="uploadForm" method="POST" enctype="multipart/form-data">
+
+        <label class="upload-box">
+
+            <input
+                type="file"
+                id="pdf_file"
+                name="pdf_file"
+                accept=".pdf"
+                required>
+
+            <div class="icon">📂</div>
+
+            <h3>اسحب ملف PDF هنا</h3>
+
+            <p>أو اضغط لاختيار الملف</p>
+
+            <span id="file-name">
+                لم يتم اختيار أي ملف
+            </span>
+
+        </label>
+
+        <button id="convertBtn" type="submit">
+            🚀 تحويل إلى Word
+        </button>
+
+    </form>
+
+    <div id="loading" class="loading">
+        ⏳ جاري تحويل الملف... يرجى الانتظار
+    </div>
+
+    <div class="footer">
+        © 2026 Fileora
+    </div>
+
+</div>
+
+<script>
+
+const input = document.getElementById("pdf_file");
+const fileName = document.getElementById("file-name");
+const form = document.getElementById("uploadForm");
+const loading = document.getElementById("loading");
+const button = document.getElementById("convertBtn");
+
+input.addEventListener("change", function(){
+
+    if(this.files.length){
+
+        fileName.innerHTML="✅ "+this.files[0].name;
+
+    }
+
+});
+
+form.addEventListener("submit",function(){
+
+    loading.style.display="block";
+
+    button.disabled=true;
+
+    button.innerHTML="جاري التحويل...";
+
+});
+
+</script>
+
+</body>
+
+</html>

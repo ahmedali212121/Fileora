@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fileora | دمج PDF</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:Arial,Tahoma,sans-serif;
+background:#181a1b;
+color:#f1f5f9;
+min-height:100vh
+}
+
+.navbar{
+height:70px;
+background:#17191a;
+border-bottom:1px solid #292d31;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 6%
+}
+
+.logo{
+color:#3b82f6;
+font-size:25px;
+font-weight:bold
+}
+
+.nav-links{
+display:flex;
+align-items:center;
+gap:18px
+}
+
+.nav-links a{
+color:#d1d5db;
+text-decoration:none;
+font-size:14px
+}
+
+.language-btn{
+border:1px solid #30353a;
+background:#202326;
+color:#d1d5db;
+padding:9px 15px;
+border-radius:9px;
+cursor:pointer
+}
+
+.container{
+max-width:800px;
+margin:auto;
+padding:60px 20px
+}
+
+.header{
+text-align:center;
+margin-bottom:35px
+}
+
+.icon{
+width:85px;
+height:85px;
+margin:0 auto 20px;
+border-radius:22px;
+background:#202326;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:43px
+}
+
+h1{
+font-size:40px;
+margin-bottom:12px
+}
+
+.description{
+color:#9ca3af;
+font-size:17px;
+line-height:1.7
+}
+
+.card{
+background:#1c1f21;
+border:1px solid #262a2e;
+border-radius:25px;
+padding:35px
+}
+
+.drop-area{
+display:block;
+border:2px dashed #2563eb;
+border-radius:20px;
+background:#191c1e;
+padding:55px 20px;
+text-align:center;
+cursor:pointer
+}
+
+.drop-icon{
+font-size:50px;
+margin-bottom:15px
+}
+
+.drop-title{
+color:#3b82f6;
+font-size:21px;
+font-weight:bold;
+margin-bottom:10px
+}
+
+.drop-text{
+color:#9ca3af;
+font-size:14px
+}
+
+input[type=file]{
+display:none
+}
+
+.file-name{
+display:none;
+margin-top:18px;
+background:#25292d;
+border:1px solid #30353a;
+padding:14px;
+border-radius:12px;
+color:#dbeafe;
+line-height:1.8
+}
+
+.btn{
+width:100%;
+margin-top:22px;
+padding:17px;
+border:0;
+border-radius:13px;
+background:#2563eb;
+color:white;
+font-size:18px;
+font-weight:bold;
+cursor:pointer
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:25px;
+color:#3b82f6;
+text-decoration:none
+}
+
+@media(max-width:700px){
+.nav-links a{display:none}
+h1{font-size:31px}
+.card{padding:20px}
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">📄 Fileora</div>
+
+<div class="nav-links">
+
+<a href="/">الرئيسية</a>
+<a href="/pdf-to-word">PDF إلى Word</a>
+<a href="/word-to-pdf">Word إلى PDF</a>
+<a href="/compress-pdf">ضغط PDF</a>
+<a href="/split-pdf">تقسيم PDF</a>
+
+<button class="language-btn" id="languageBtn" onclick="toggleLanguage()">
+English
+</button>
+
+</div>
+</nav>
+
+<main class="container">
+
+<div class="header">
+
+<div class="icon">📚</div>
+
+<h1>دمج ملفات PDF</h1>
+
+<p class="description">
+اجمع عدة ملفات PDF في ملف واحد.
+</p>
+
+</div>
+
+<div class="card">
+
+<form method="POST" enctype="multipart/form-data">
+
+<label class="drop-area" for="pdf_files">
+
+<div class="drop-icon">📁</div>
+
+<div class="drop-title">
+اختر ملفات PDF
+</div>
+
+<div class="drop-text">
+يمكنك اختيار ملفين أو أكثر
+</div>
+
+</label>
+
+<input
+type="file"
+id="pdf_files"
+name="pdf_files"
+accept=".pdf"
+multiple
+required
+>
+
+<div class="file-name" id="fileName"></div>
+
+<button class="btn" type="submit">
+دمج ملفات PDF
+</button>
+
+</form>
+
+<a href="/" class="back">
+← العودة إلى Fileora
+</a>
+
+</div>
+</main>
+
+<script>
+
+const input=document.getElementById("pdf_files");
+const fileName=document.getElementById("fileName");
+
+input.addEventListener("change",function(){
+
+if(this.files.length){
+
+let text="📄 الملفات المختارة:<br>";
+
+for(let i=0;i<this.files.length;i++){
+text+=(i+1)+" - "+this.files[i].name+"<br>";
+}
+
+fileName.innerHTML=text;
+fileName.style.display="block";
+
+}
+
+});
+
+</script>
+
+<script src="{{ url_for('static', filename='language.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fileora</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Tahoma,sans-serif;
+    background:#181a1b;
+    color:#f1f5f9;
+    min-height:100vh;
+}
+
+.navbar{
+    height:70px;
+    background:#17191a;
+    border-bottom:1px solid #292d31;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+}
+
+.logo{
+    color:#3b82f6;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.nav-links a{
+    color:#d1d5db;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.nav-links a:hover{
+    color:#3b82f6;
+}
+
+.language-btn{
+    border:1px solid #30353a;
+    background:#202326;
+    color:#d1d5db;
+    padding:9px 15px;
+    border-radius:9px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.language-btn:hover{
+    background:#2563eb;
+    color:white;
+}
+
+.hero{
+    max-width:1000px;
+    margin:auto;
+    padding:85px 20px 55px;
+    text-align:center;
+}
+
+.hero-icon{
+    width:90px;
+    height:90px;
+    margin:0 auto 25px;
+    border-radius:25px;
+    background:#202326;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:45px;
+}
+
+.hero h1{
+    font-size:52px;
+    margin-bottom:18px;
+}
+
+.hero h1 span{
+    color:#3b82f6;
+}
+
+.hero p{
+    max-width:650px;
+    margin:auto;
+    color:#9ca3af;
+    font-size:18px;
+    line-height:1.8;
+}
+
+.tools{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+.tools-title{
+    text-align:center;
+    font-size:28px;
+    margin-bottom:30px;
+}
+
+.tools-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.tool-card{
+    background:#1c1f21;
+    border:1px solid #262a2e;
+    border-radius:20px;
+    padding:28px;
+    transition:.2s;
+}
+
+.tool-card:hover{
+    transform:translateY(-5px);
+    border-color:#2563eb;
+    background:#202326;
+}
+
+.tool-icon{
+    width:55px;
+    height:55px;
+    border-radius:15px;
+    background:#202a3a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    margin-bottom:18px;
+}
+
+.tool-card h3{
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.tool-card p{
+    color:#9ca3af;
+    font-size:14px;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.tool-button{
+    display:block;
+    text-align:center;
+    background:#2563eb;
+    color:white;
+    padding:12px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.tool-button:hover{
+    background:#1d4ed8;
+}
+
+.info{
+    max-width:1000px;
+    margin:60px auto 0;
+    padding:20px;
+}
+
+.info-box{
+    background:#1c1f21;
+    border:1px solid #262a2e;
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+}
+
+.info-box h2{
+    margin-bottom:12px;
+}
+
+.info-box p{
+    color:#9ca3af;
+    line-height:1.8;
+}
+
+footer{
+    text-align:center;
+    color:#6b7280;
+    padding:50px 20px 30px;
+}
+
+@media(max-width:800px){
+
+    .nav-links a{
+        display:none;
+    }
+
+    .hero{
+        padding-top:60px;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .tools-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">
+📄 Fileora
+</div>
+
+<div class="nav-links">
+
+<a href="/pdf-to-word">PDF إلى Word</a>
+
+<a href="/word-to-pdf">Word إلى PDF</a>
+
+<a href="/merge-pdf">دمج PDF</a>
+
+<a href="/compress-pdf">ضغط PDF</a>
+
+<a href="/split-pdf">تقسيم PDF</a>
+
+<button
+class="language-btn"
+id="languageBtn"
+onclick="toggleLanguage()">
+English
+</button>
+
+</div>
+
+</nav>
+
+<section class="hero">
+
+<div class="hero-icon">
+📄
+</div>
+
+<h1>
+أدوات الملفات مع
+<span>Fileora</span>
+</h1>
+
+<p>
+مجموعة بسيطة وسريعة من أدوات PDF
+لتحويل الملفات وضغطها ودمجها وتقسيمها بسهولة.
+</p>
+
+</section>
+
+<section class="tools">
+
+<h2 class="tools-title">
+اختر الأداة التي تحتاجها
+</h2>
+
+<div class="tools-grid">
+
+<div class="tool-card">
+
+<div class="tool-icon">📄</div>
+
+<h3>PDF إلى Word</h3>
+
+<p>
+حوّل ملفات PDF إلى مستندات Word قابلة للتعديل.
+</p>
+
+<a href="/pdf-to-word" class="tool-button">
+استخدام الأداة
+</a>
+
+</div>
+
+<div class="tool-card">
+
+<div class="tool-icon">📝</div>
+
+<h3>Word إلى PDF</h3>
+
+<p>
+حوّل مستندات Word إلى ملفات PDF بسهولة.
+</p>
+
+<a href="/word-to-pdf" class="tool-button">
+استخدام الأداة
+</a>
+
+</div>
+
+<div class="tool-card">
+
+<div class="tool-icon">📚</div>
+
+<h3>دمج PDF</h3>
+
+<p>
+اجمع عدة ملفات PDF في ملف واحد.
+</p>
+
+<a href="/merge-pdf" class="tool-button">
+استخدام الأداة
+</a>
+
+</div>
+
+<div class="tool-card">
+
+<div class="tool-icon">🗜️</div>
+
+<h3>ضغط PDF</h3>
+
+<p>
+قلل حجم ملفات PDF بسهولة.
+</p>
+
+<a href="/compress-pdf" class="tool-button">
+استخدام الأداة
+</a>
+
+</div>
+
+<div class="tool-card">
+
+<div class="tool-icon">✂️</div>
+
+<h3>تقسيم PDF</h3>
+
+<p>
+استخرج الصفحات التي تحتاجها من ملف PDF.
+</p>
+
+<a href="/split-pdf" class="tool-button">
+استخدام الأداة
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="info">
+
+<div class="info-box">
+
+<h2>لماذا Fileora؟</h2>
+
+<p>
+واجهة بسيطة وأدوات واضحة لتحويل ملفاتك
+بدون خطوات معقدة.
+</p>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 Fileora
+</footer>
+
+<script src="{{ url_for('static', filename='language.js') }}"></script>
+
+</body>
+
+</html>

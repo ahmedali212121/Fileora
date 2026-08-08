@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Tahoma, sans-serif;
+    background: #181a1b;
+    color: #f1f5f9;
+    min-height: 100vh;
+}
+
+a {
+    transition: 0.2s ease;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+::selection {
+    background: #2563eb;
+    color: white;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #151719;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #30353a;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3b82f6;
+}
+
+@media (max-width: 700px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+}
