@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file, render_template
+from flask import Flask, request, send_file, render_template, Response
 from pdf2docx import Converter
 from docx2pdf import convert
 from pypdf import PdfWriter, PdfReader
@@ -14,9 +14,56 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 
+# الصفحة الرئيسية
 @app.route("/")
 def home():
     return render_template("home.html")
+
+
+# robots.txt
+@app.route("/robots.txt")
+def robots_txt():
+    content = """User-agent: *
+Allow: /
+
+Sitemap: https://nextoolia.com/sitemap.xml
+"""
+    return Response(content, mimetype="text/plain")
+
+
+# sitemap.xml
+@app.route("/sitemap.xml")
+def sitemap_xml():
+    content = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>https://nextoolia.com/</loc>
+    </url>
+
+    <url>
+        <loc>https://nextoolia.com/pdf-to-word</loc>
+    </url>
+
+    <url>
+        <loc>https://nextoolia.com/word-to-pdf</loc>
+    </url>
+
+    <url>
+        <loc>https://nextoolia.com/merge-pdf</loc>
+    </url>
+
+    <url>
+        <loc>https://nextoolia.com/compress-pdf</loc>
+    </url>
+
+    <url>
+        <loc>https://nextoolia.com/split-pdf</loc>
+    </url>
+
+</urlset>
+"""
+    return Response(content, mimetype="application/xml")
 
 
 # PDF إلى Word
@@ -174,7 +221,10 @@ def merge_pdf():
             writer = PdfWriter()
 
             for pdf_path in pdf_files:
-                writer.append(pdf_path)
+                reader = PdfReader(pdf_path)
+
+                for page in reader.pages:
+                    writer.add_page(page)
 
             with open(output_path, "wb") as output_file:
                 writer.write(output_file)
@@ -324,7 +374,6 @@ def split_pdf():
                 start_page - 1,
                 end_page
             ):
-
                 writer.add_page(
                     reader.pages[page_number]
                 )
