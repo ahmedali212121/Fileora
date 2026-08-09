@@ -61,9 +61,49 @@ def sitemap_xml():
         <loc>https://nextoolia.com/split-pdf</loc>
     </url>
 
+    <url>
+        <loc>https://nextoolia.com/privacy</loc>
+    </url>
+
+    <url>
+        <loc>https://nextoolia.com/terms</loc>
+    </url>
+
+    <url>
+        <loc>https://nextoolia.com/about</loc>
+    </url>
+
+    <url>
+        <loc>https://nextoolia.com/contact</loc>
+    </url>
+
 </urlset>
 """
     return Response(content, mimetype="application/xml")
+
+
+# سياسة الخصوصية
+@app.route("/privacy")
+def privacy():
+    return render_template("privacy.html")
+
+
+# شروط الاستخدام
+@app.route("/terms")
+def terms():
+    return render_template("terms.html")
+
+
+# من نحن
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+# اتصل بنا
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
 
 
 # PDF إلى Word
@@ -103,7 +143,7 @@ def pdf_to_word():
             return send_file(
                 docx_path,
                 as_attachment=True,
-                download_name="Fileora.docx"
+                download_name="NexToolia.docx"
             )
 
         except Exception as e:
@@ -163,7 +203,7 @@ def word_to_pdf():
             return send_file(
                 pdf_path,
                 as_attachment=True,
-                download_name="Fileora.pdf"
+                download_name="NexToolia.pdf"
             )
 
         except Exception as e:
@@ -221,6 +261,7 @@ def merge_pdf():
             writer = PdfWriter()
 
             for pdf_path in pdf_files:
+
                 reader = PdfReader(pdf_path)
 
                 for page in reader.pages:
@@ -234,7 +275,7 @@ def merge_pdf():
             return send_file(
                 output_path,
                 as_attachment=True,
-                download_name="Fileora-Merged.pdf"
+                download_name="NexToolia-Merged.pdf"
             )
 
         except Exception as e:
@@ -299,7 +340,7 @@ def compress_pdf():
             return send_file(
                 output_path,
                 as_attachment=True,
-                download_name="Fileora-Compressed.pdf"
+                download_name="NexToolia-Compressed.pdf"
             )
 
         except Exception as e:
@@ -384,7 +425,7 @@ def split_pdf():
             return send_file(
                 output_path,
                 as_attachment=True,
-                download_name="Fileora-Split.pdf"
+                download_name="NexToolia-Split.pdf"
             )
 
         except Exception as e:
@@ -398,6 +439,7 @@ def split_pdf():
     return render_template("split_pdf.html")
 
 
+# تشغيل التطبيق
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
