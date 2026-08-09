@@ -1,271 +1,584 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fileora | دمج PDF</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
+    <title>NexToolia | دمج ملفات PDF</title>
 
-body{
-font-family:Arial,Tahoma,sans-serif;
-background:#181a1b;
-color:#f1f5f9;
-min-height:100vh
-}
+    <meta name="description"
+          content="ادمج عدة ملفات PDF في ملف واحد بسهولة وسرعة باستخدام أداة NexToolia المجانية.">
 
-.navbar{
-height:70px;
-background:#17191a;
-border-bottom:1px solid #292d31;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 6%
-}
+    <meta name="robots" content="index, follow">
 
-.logo{
-color:#3b82f6;
-font-size:25px;
-font-weight:bold
-}
+    <link rel="canonical" href="https://nextoolia.com/merge-pdf">
 
-.nav-links{
-display:flex;
-align-items:center;
-gap:18px
-}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-.nav-links a{
-color:#d1d5db;
-text-decoration:none;
-font-size:14px
-}
+        body {
+            font-family: Arial, Tahoma, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            min-height: 100vh;
+        }
 
-.language-btn{
-border:1px solid #30353a;
-background:#202326;
-color:#d1d5db;
-padding:9px 15px;
-border-radius:9px;
-cursor:pointer
-}
+        .navbar {
+            min-height: 70px;
+            background: #0f172a;
+            border-bottom: 1px solid #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+        }
 
-.container{
-max-width:800px;
-margin:auto;
-padding:60px 20px
-}
+        .logo {
+            color: #60a5fa;
+            font-size: 25px;
+            font-weight: 800;
+            text-decoration: none;
+        }
 
-.header{
-text-align:center;
-margin-bottom:35px
-}
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
 
-.icon{
-width:85px;
-height:85px;
-margin:0 auto 20px;
-border-radius:22px;
-background:#202326;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:43px
-}
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+        }
 
-h1{
-font-size:40px;
-margin-bottom:12px
-}
+        .nav-links a:hover {
+            color: #60a5fa;
+        }
 
-.description{
-color:#9ca3af;
-font-size:17px;
-line-height:1.7
-}
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 60px 20px 80px;
+        }
 
-.card{
-background:#1c1f21;
-border:1px solid #262a2e;
-border-radius:25px;
-padding:35px
-}
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
 
-.drop-area{
-display:block;
-border:2px dashed #2563eb;
-border-radius:20px;
-background:#191c1e;
-padding:55px 20px;
-text-align:center;
-cursor:pointer
-}
+        .icon {
+            width: 85px;
+            height: 85px;
+            margin: 0 auto 20px;
+            border-radius: 22px;
+            background: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 43px;
+        }
 
-.drop-icon{
-font-size:50px;
-margin-bottom:15px
-}
+        h1 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
 
-.drop-title{
-color:#3b82f6;
-font-size:21px;
-font-weight:bold;
-margin-bottom:10px
-}
+        .description {
+            color: #cbd5e1;
+            font-size: 17px;
+            line-height: 1.8;
+            max-width: 680px;
+            margin: auto;
+        }
 
-.drop-text{
-color:#9ca3af;
-font-size:14px
-}
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 25px;
+            padding: 35px;
+        }
 
-input[type=file]{
-display:none
-}
+        .drop-area {
+            display: block;
+            border: 2px dashed #3b82f6;
+            border-radius: 20px;
+            background: #172033;
+            padding: 55px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
 
-.file-name{
-display:none;
-margin-top:18px;
-background:#25292d;
-border:1px solid #30353a;
-padding:14px;
-border-radius:12px;
-color:#dbeafe;
-line-height:1.8
-}
+        .drop-area:hover {
+            background: #1d2a40;
+            border-color: #60a5fa;
+        }
 
-.btn{
-width:100%;
-margin-top:22px;
-padding:17px;
-border:0;
-border-radius:13px;
-background:#2563eb;
-color:white;
-font-size:18px;
-font-weight:bold;
-cursor:pointer
-}
+        .drop-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
 
-.back{
-display:block;
-text-align:center;
-margin-top:25px;
-color:#3b82f6;
-text-decoration:none
-}
+        .drop-title {
+            color: #60a5fa;
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-@media(max-width:700px){
-.nav-links a{display:none}
-h1{font-size:31px}
-.card{padding:20px}
-}
-</style>
+        .drop-text {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-list {
+            display: none;
+            margin-top: 18px;
+            background: #172033;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .file-list-title {
+            color: #dbeafe;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .file-item {
+            color: #94a3b8;
+            padding: 7px 0;
+            border-bottom: 1px solid #26344a;
+            word-break: break-word;
+        }
+
+        .file-item:last-child {
+            border-bottom: 0;
+        }
+
+        .btn {
+            width: 100%;
+            margin-top: 22px;
+            padding: 17px;
+            border: 0;
+            border-radius: 13px;
+            background: #2563eb;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        .info {
+            margin-top: 45px;
+            color: #cbd5e1;
+            line-height: 1.9;
+        }
+
+        .info h2 {
+            color: #f8fafc;
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .info p {
+            margin-bottom: 20px;
+        }
+
+        .steps {
+            margin: 15px 0 25px;
+            padding-right: 25px;
+        }
+
+        .steps li {
+            margin-bottom: 10px;
+        }
+
+        .faq {
+            margin-top: 40px;
+        }
+
+        .faq h2 {
+            margin-bottom: 18px;
+        }
+
+        .faq-item {
+            background: #172033;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 12px;
+        }
+
+        .faq-item h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+            color: #f8fafc;
+        }
+
+        .faq-item p {
+            color: #94a3b8;
+            line-height: 1.8;
+        }
+
+        footer {
+            border-top: 1px solid #1e293b;
+            text-align: center;
+            padding: 30px 20px;
+            color: #64748b;
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 7px;
+        }
+
+        footer a:hover {
+            color: #60a5fa;
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px 5%;
+            }
+
+            .nav-links a {
+                display: none;
+            }
+
+            h1 {
+                font-size: 31px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .container {
+                padding-top: 45px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <nav class="navbar">
 
-<div class="logo">📄 Fileora</div>
+    <a href="/" class="logo">
+        NexToolia
+    </a>
 
-<div class="nav-links">
+    <div class="nav-links">
 
-<a href="/">الرئيسية</a>
-<a href="/pdf-to-word">PDF إلى Word</a>
-<a href="/word-to-pdf">Word إلى PDF</a>
-<a href="/compress-pdf">ضغط PDF</a>
-<a href="/split-pdf">تقسيم PDF</a>
+        <a href="/">الرئيسية</a>
 
-<button class="language-btn" id="languageBtn" onclick="toggleLanguage()">
-English
-</button>
+        <a href="/pdf-to-word">PDF إلى Word</a>
 
-</div>
+        <a href="/word-to-pdf">Word إلى PDF</a>
+
+        <a href="/compress-pdf">ضغط PDF</a>
+
+        <a href="/split-pdf">تقسيم PDF</a>
+
+    </div>
+
 </nav>
+
 
 <main class="container">
 
-<div class="header">
+    <section class="header">
 
-<div class="icon">📚</div>
+        <div class="icon">
+            📚
+        </div>
 
-<h1>دمج ملفات PDF</h1>
+        <h1>
+            دمج ملفات PDF
+        </h1>
 
-<p class="description">
-اجمع عدة ملفات PDF في ملف واحد.
-</p>
+        <p class="description">
+            اجمع عدة ملفات PDF في ملف واحد بسهولة وسرعة
+            باستخدام أداة NexToolia المجانية.
+        </p>
 
-</div>
+    </section>
 
-<div class="card">
 
-<form method="POST" enctype="multipart/form-data">
+    <section class="card">
 
-<label class="drop-area" for="pdf_files">
+        <form
+            method="POST"
+            enctype="multipart/form-data">
 
-<div class="drop-icon">📁</div>
+            <label
+                class="drop-area"
+                for="pdf_files">
 
-<div class="drop-title">
-اختر ملفات PDF
-</div>
+                <div class="drop-icon">
+                    📚
+                </div>
 
-<div class="drop-text">
-يمكنك اختيار ملفين أو أكثر
-</div>
+                <div class="drop-title">
+                    اختر ملفات PDF
+                </div>
 
-</label>
+                <div class="drop-text">
+                    يمكنك اختيار ملفين أو أكثر لدمجها في ملف واحد
+                </div>
 
-<input
-type="file"
-id="pdf_files"
-name="pdf_files"
-accept=".pdf"
-multiple
-required
->
+            </label>
 
-<div class="file-name" id="fileName"></div>
 
-<button class="btn" type="submit">
-دمج ملفات PDF
-</button>
+            <input
+                type="file"
+                id="pdf_files"
+                name="pdf_files"
+                accept=".pdf,application/pdf"
+                multiple
+                required>
 
-</form>
 
-<a href="/" class="back">
-← العودة إلى Fileora
-</a>
+            <div
+                class="file-list"
+                id="fileList">
 
-</div>
+                <div class="file-list-title">
+                    الملفات المختارة:
+                </div>
+
+                <div id="files"></div>
+
+            </div>
+
+
+            <button
+                class="btn"
+                type="submit">
+
+                دمج ملفات PDF
+
+            </button>
+
+        </form>
+
+
+        <a
+            href="/"
+            class="back">
+
+            ← العودة إلى NexToolia
+
+        </a>
+
+    </section>
+
+
+    <section class="info">
+
+        <h2>
+            ما هي أداة دمج PDF؟
+        </h2>
+
+        <p>
+            تتيح لك أداة NexToolia جمع عدة ملفات PDF
+            في مستند PDF واحد بطريقة سهلة وسريعة.
+        </p>
+
+
+        <h2>
+            كيفية دمج ملفات PDF
+        </h2>
+
+        <ol class="steps">
+
+            <li>
+                اضغط على مربع اختيار الملفات.
+            </li>
+
+            <li>
+                اختر ملفين PDF أو أكثر من جهازك.
+            </li>
+
+            <li>
+                تأكد من ظهور الملفات التي اخترتها.
+            </li>
+
+            <li>
+                اضغط على زر «دمج ملفات PDF».
+            </li>
+
+            <li>
+                سيتم إنشاء ملف PDF واحد يحتوي على جميع الملفات.
+            </li>
+
+        </ol>
+
+
+        <h2>
+            لماذا تستخدم NexToolia؟
+        </h2>
+
+        <p>
+            توفر NexToolia أدوات سهلة ومباشرة للتعامل مع
+            ملفات PDF والمستندات، دون خطوات معقدة.
+        </p>
+
+
+        <section class="faq">
+
+            <h2>
+                الأسئلة الشائعة
+            </h2>
+
+            <div class="faq-item">
+
+                <h3>
+                    كم ملف PDF يمكنني دمجه؟
+                </h3>
+
+                <p>
+                    يمكنك اختيار ملفين PDF أو أكثر،
+                    وسيتم جمعها في ملف PDF واحد.
+                </p>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <h3>
+                    هل أداة دمج PDF مجانية؟
+                </h3>
+
+                <p>
+                    نعم، أداة دمج PDF متاحة مجانًا
+                    عبر موقع NexToolia.
+                </p>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <h3>
+                    هل يتم تغيير محتوى الملفات؟
+                </h3>
+
+                <p>
+                    يتم جمع صفحات الملفات في ملف PDF واحد
+                    مع الحفاظ على محتوى الصفحات.
+                </p>
+
+            </div>
+
+        </section>
+
+    </section>
+
 </main>
+
+
+<footer>
+
+    <p>
+        © 2026 NexToolia - جميع الحقوق محفوظة
+    </p>
+
+    <p style="margin-top: 12px;">
+
+        <a href="/privacy">الخصوصية</a>
+
+        <a href="/terms">الشروط</a>
+
+        <a href="/about">من نحن</a>
+
+        <a href="/contact">اتصل بنا</a>
+
+    </p>
+
+</footer>
+
 
 <script>
 
-const input=document.getElementById("pdf_files");
-const fileName=document.getElementById("fileName");
+    const input =
+        document.getElementById("pdf_files");
 
-input.addEventListener("change",function(){
+    const fileList =
+        document.getElementById("fileList");
 
-if(this.files.length){
+    const filesContainer =
+        document.getElementById("files");
 
-let text="📄 الملفات المختارة:<br>";
 
-for(let i=0;i<this.files.length;i++){
-text+=(i+1)+" - "+this.files[i].name+"<br>";
-}
+    input.addEventListener(
+        "change",
+        function () {
 
-fileName.innerHTML=text;
-fileName.style.display="block";
+            filesContainer.innerHTML = "";
 
-}
+            if (this.files.length) {
 
-});
+                fileList.style.display = "block";
+
+                Array.from(this.files).forEach(
+                    function (file, index) {
+
+                        const item =
+                            document.createElement("div");
+
+                        item.className = "file-item";
+
+                        item.textContent =
+                            (index + 1) + ". " + file.name;
+
+                        filesContainer.appendChild(item);
+
+                    }
+                );
+
+            } else {
+
+                fileList.style.display = "none";
+
+            }
+
+        }
+    );
 
 </script>
-
-<script src="{{ url_for('static', filename='language.js') }}"></script>
 
 </body>
 </html>

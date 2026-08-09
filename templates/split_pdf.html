@@ -1,349 +1,632 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fileora | تقسيم PDF</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
+    <title>NexToolia | تقسيم ملفات PDF</title>
 
-body{
-font-family:Arial,Tahoma,sans-serif;
-background:#181a1b;
-color:#f1f5f9;
-min-height:100vh
-}
+    <meta name="description"
+          content="قسّم ملفات PDF واستخرج الصفحات التي تحتاجها بسهولة وسرعة باستخدام أداة NexToolia المجانية.">
 
-.navbar{
-height:70px;
-background:#17191a;
-border-bottom:1px solid #292d31;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 6%
-}
+    <meta name="robots" content="index, follow">
 
-.logo{
-color:#3b82f6;
-font-size:25px;
-font-weight:bold
-}
+    <link rel="canonical" href="https://nextoolia.com/split-pdf">
 
-.nav-links{
-display:flex;
-align-items:center;
-gap:18px
-}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-.nav-links a{
-color:#d1d5db;
-text-decoration:none;
-font-size:14px
-}
+        body {
+            font-family: Arial, Tahoma, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            min-height: 100vh;
+        }
 
-.language-btn{
-border:1px solid #30353a;
-background:#202326;
-color:#d1d5db;
-padding:9px 15px;
-border-radius:9px;
-cursor:pointer
-}
+        .navbar {
+            min-height: 70px;
+            background: #0f172a;
+            border-bottom: 1px solid #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+        }
 
-.container{
-max-width:800px;
-margin:auto;
-padding:60px 20px
-}
+        .logo {
+            color: #60a5fa;
+            font-size: 25px;
+            font-weight: 800;
+            text-decoration: none;
+        }
 
-.header{
-text-align:center;
-margin-bottom:35px
-}
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
 
-.icon{
-width:85px;
-height:85px;
-margin:0 auto 20px;
-border-radius:22px;
-background:#202326;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:43px
-}
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+        }
 
-h1{
-font-size:40px;
-margin-bottom:12px
-}
+        .nav-links a:hover {
+            color: #60a5fa;
+        }
 
-.description{
-color:#9ca3af;
-font-size:17px;
-line-height:1.7
-}
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 60px 20px 80px;
+        }
 
-.card{
-background:#1c1f21;
-border:1px solid #262a2e;
-border-radius:25px;
-padding:35px
-}
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
 
-.drop-area{
-display:block;
-border:2px dashed #2563eb;
-border-radius:20px;
-background:#191c1e;
-padding:50px 20px;
-text-align:center;
-cursor:pointer
-}
+        .icon {
+            width: 85px;
+            height: 85px;
+            margin: 0 auto 20px;
+            border-radius: 22px;
+            background: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 43px;
+        }
 
-.drop-icon{
-font-size:50px;
-margin-bottom:15px
-}
+        h1 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
 
-.drop-title{
-color:#3b82f6;
-font-size:21px;
-font-weight:bold;
-margin-bottom:10px
-}
+        .description {
+            color: #cbd5e1;
+            font-size: 17px;
+            line-height: 1.8;
+            max-width: 680px;
+            margin: auto;
+        }
 
-.drop-text{
-color:#9ca3af;
-font-size:14px
-}
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 25px;
+            padding: 35px;
+        }
 
-input[type=file]{
-display:none
-}
+        .drop-area {
+            display: block;
+            border: 2px dashed #3b82f6;
+            border-radius: 20px;
+            background: #172033;
+            padding: 55px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
 
-.file-name{
-display:none;
-margin-top:18px;
-background:#25292d;
-border:1px solid #30353a;
-padding:14px;
-border-radius:12px;
-color:#dbeafe
-}
+        .drop-area:hover {
+            background: #1d2a40;
+            border-color: #60a5fa;
+        }
 
-.pages{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-margin-top:20px
-}
+        .drop-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
 
-.page-box label{
-display:block;
-color:#d1d5db;
-margin-bottom:8px
-}
+        .drop-title {
+            color: #60a5fa;
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-.page-box input{
-width:100%;
-padding:15px;
-border:1px solid #343a40;
-border-radius:12px;
-background:#151719;
-color:white;
-font-size:16px
-}
+        .drop-text {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.7;
+        }
 
-.btn{
-width:100%;
-margin-top:22px;
-padding:17px;
-border:0;
-border-radius:13px;
-background:#2563eb;
-color:white;
-font-size:18px;
-font-weight:bold;
-cursor:pointer
-}
+        input[type="file"] {
+            display: none;
+        }
 
-.back{
-display:block;
-text-align:center;
-margin-top:25px;
-color:#3b82f6;
-text-decoration:none
-}
+        .file-name {
+            display: none;
+            margin-top: 18px;
+            background: #172033;
+            border: 1px solid #334155;
+            padding: 14px;
+            border-radius: 12px;
+            color: #dbeafe;
+            word-break: break-word;
+        }
 
-@media(max-width:700px){
+        .range-title {
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: #f8fafc;
+            font-size: 17px;
+            font-weight: bold;
+        }
 
-.nav-links a{
-display:none
-}
+        .range {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
 
-h1{
-font-size:31px
-}
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
-.card{
-padding:20px
-}
+        .field label {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
 
-.pages{
-grid-template-columns:1fr
-}
+        .field input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            background: #172033;
+            color: #f8fafc;
+            font-size: 16px;
+            outline: none;
+        }
 
-}
-</style>
+        .field input:focus {
+            border-color: #3b82f6;
+        }
+
+        .btn {
+            width: 100%;
+            margin-top: 22px;
+            padding: 17px;
+            border: 0;
+            border-radius: 13px;
+            background: #2563eb;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        .info {
+            margin-top: 45px;
+            color: #cbd5e1;
+            line-height: 1.9;
+        }
+
+        .info h2 {
+            color: #f8fafc;
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .info p {
+            margin-bottom: 20px;
+        }
+
+        .steps {
+            margin: 15px 0 25px;
+            padding-right: 25px;
+        }
+
+        .steps li {
+            margin-bottom: 10px;
+        }
+
+        .faq {
+            margin-top: 40px;
+        }
+
+        .faq h2 {
+            margin-bottom: 18px;
+        }
+
+        .faq-item {
+            background: #172033;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 12px;
+        }
+
+        .faq-item h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .faq-item p {
+            color: #94a3b8;
+            line-height: 1.8;
+        }
+
+        footer {
+            border-top: 1px solid #1e293b;
+            text-align: center;
+            padding: 30px 20px;
+            color: #64748b;
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 7px;
+        }
+
+        footer a:hover {
+            color: #60a5fa;
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px 5%;
+            }
+
+            .nav-links a {
+                display: none;
+            }
+
+            h1 {
+                font-size: 31px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .range {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding-top: 45px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <nav class="navbar">
 
-<div class="logo">
-📄 Fileora
-</div>
+    <a href="/" class="logo">
+        NexToolia
+    </a>
 
-<div class="nav-links">
+    <div class="nav-links">
 
-<a href="/">الرئيسية</a>
-<a href="/pdf-to-word">PDF إلى Word</a>
-<a href="/word-to-pdf">Word إلى PDF</a>
-<a href="/merge-pdf">دمج PDF</a>
-<a href="/compress-pdf">ضغط PDF</a>
+        <a href="/">الرئيسية</a>
 
-<button
-class="language-btn"
-id="languageBtn"
-onclick="toggleLanguage()">
-English
-</button>
+        <a href="/pdf-to-word">PDF إلى Word</a>
 
-</div>
+        <a href="/word-to-pdf">Word إلى PDF</a>
+
+        <a href="/merge-pdf">دمج PDF</a>
+
+        <a href="/compress-pdf">ضغط PDF</a>
+
+    </div>
+
 </nav>
+
 
 <main class="container">
 
-<div class="header">
+    <section class="header">
 
-<div class="icon">
-✂️
-</div>
+        <div class="icon">
+            ✂️
+        </div>
 
-<h1>
-تقسيم ملف PDF
-</h1>
+        <h1>
+            تقسيم ملفات PDF
+        </h1>
 
-<p class="description">
-حدد الصفحات التي تريد استخراجها من ملف PDF.
-</p>
+        <p class="description">
+            استخرج الصفحات التي تحتاجها من ملف PDF
+            واحفظها في ملف جديد بسهولة.
+        </p>
 
-</div>
+    </section>
 
-<div class="card">
 
-<form method="POST" enctype="multipart/form-data">
+    <section class="card">
 
-<label class="drop-area" for="pdf_file">
+        <form
+            method="POST"
+            enctype="multipart/form-data">
 
-<div class="drop-icon">
-📁
-</div>
+            <label
+                class="drop-area"
+                for="pdf_file">
 
-<div class="drop-title">
-اختر ملف PDF
-</div>
+                <div class="drop-icon">
+                    📄
+                </div>
 
-<div class="drop-text">
-اختر الملف الذي تريد تقسيمه
-</div>
+                <div class="drop-title">
+                    اختر ملف PDF
+                </div>
 
-</label>
+                <div class="drop-text">
+                    اضغط هنا لاختيار ملف PDF من جهازك
+                </div>
 
-<input
-type="file"
-id="pdf_file"
-name="pdf_file"
-accept=".pdf"
-required
->
+            </label>
 
-<div class="file-name" id="fileName"></div>
 
-<div class="pages">
+            <input
+                type="file"
+                id="pdf_file"
+                name="pdf_file"
+                accept=".pdf,application/pdf"
+                required>
 
-<div class="page-box">
 
-<label>
-من الصفحة
-</label>
+            <div
+                class="file-name"
+                id="fileName">
+            </div>
 
-<input
-type="number"
-name="start_page"
-min="1"
-placeholder="مثال: 1"
-required
->
 
-</div>
+            <div class="range-title">
+                حدد نطاق الصفحات
+            </div>
 
-<div class="page-box">
 
-<label>
-إلى الصفحة
-</label>
+            <div class="range">
 
-<input
-type="number"
-name="end_page"
-min="1"
-placeholder="مثال: 5"
-required
->
+                <div class="field">
 
-</div>
+                    <label for="start_page">
+                        الصفحة الأولى
+                    </label>
 
-</div>
+                    <input
+                        type="number"
+                        id="start_page"
+                        name="start_page"
+                        min="1"
+                        placeholder="مثال: 1"
+                        required>
 
-<button class="btn" type="submit">
-تقسيم ملف PDF
-</button>
+                </div>
 
-</form>
 
-<a href="/" class="back">
-← العودة إلى Fileora
-</a>
+                <div class="field">
 
-</div>
+                    <label for="end_page">
+                        الصفحة الأخيرة
+                    </label>
+
+                    <input
+                        type="number"
+                        id="end_page"
+                        name="end_page"
+                        min="1"
+                        placeholder="مثال: 5"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="btn"
+                type="submit">
+
+                تقسيم ملف PDF
+
+            </button>
+
+        </form>
+
+
+        <a
+            href="/"
+            class="back">
+
+            ← العودة إلى NexToolia
+
+        </a>
+
+    </section>
+
+
+    <section class="info">
+
+        <h2>
+            ما هي أداة تقسيم PDF؟
+        </h2>
+
+        <p>
+            تساعدك أداة NexToolia على استخراج نطاق محدد
+            من الصفحات من ملف PDF وإنشاء ملف PDF جديد
+            يحتوي على الصفحات التي اخترتها.
+        </p>
+
+
+        <h2>
+            كيفية تقسيم ملف PDF
+        </h2>
+
+        <ol class="steps">
+
+            <li>
+                اختر ملف PDF من جهازك.
+            </li>
+
+            <li>
+                أدخل رقم الصفحة الأولى.
+            </li>
+
+            <li>
+                أدخل رقم الصفحة الأخيرة.
+            </li>
+
+            <li>
+                اضغط على زر «تقسيم ملف PDF».
+            </li>
+
+            <li>
+                سيتم إنشاء ملف PDF جديد يحتوي على الصفحات المحددة.
+            </li>
+
+        </ol>
+
+
+        <h2>
+            لماذا تستخدم NexToolia؟
+        </h2>
+
+        <p>
+            توفر NexToolia أدوات بسيطة وسهلة للتعامل
+            مع ملفات PDF والمستندات دون خطوات معقدة.
+        </p>
+
+
+        <section class="faq">
+
+            <h2>
+                الأسئلة الشائعة
+            </h2>
+
+            <div class="faq-item">
+
+                <h3>
+                    هل أداة تقسيم PDF مجانية؟
+                </h3>
+
+                <p>
+                    نعم، أداة تقسيم PDF متاحة مجانًا
+                    عبر موقع NexToolia.
+                </p>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <h3>
+                    هل يمكنني استخراج صفحة واحدة فقط؟
+                </h3>
+
+                <p>
+                    نعم. أدخل نفس رقم الصفحة في خانة
+                    الصفحة الأولى والصفحة الأخيرة.
+                </p>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <h3>
+                    ماذا يحدث إذا تجاوزت رقم الصفحة عدد صفحات الملف؟
+                </h3>
+
+                <p>
+                    سيخبرك الموقع بعدد صفحات الملف
+                    ويطلب منك إدخال نطاق صحيح.
+                </p>
+
+            </div>
+
+        </section>
+
+    </section>
 
 </main>
 
+
+<footer>
+
+    <p>
+        © 2026 NexToolia - جميع الحقوق محفوظة
+    </p>
+
+    <p style="margin-top: 12px;">
+
+        <a href="/privacy">الخصوصية</a>
+
+        <a href="/terms">الشروط</a>
+
+        <a href="/about">من نحن</a>
+
+        <a href="/contact">اتصل بنا</a>
+
+    </p>
+
+</footer>
+
+
 <script>
 
-const input=document.getElementById("pdf_file");
-const fileName=document.getElementById("fileName");
+    const input =
+        document.getElementById("pdf_file");
 
-input.addEventListener("change",function(){
+    const fileName =
+        document.getElementById("fileName");
 
-if(this.files.length){
 
-fileName.textContent="📄 "+this.files[0].name;
-fileName.style.display="block";
+    input.addEventListener(
+        "change",
+        function () {
 
-}
+            if (this.files.length) {
 
-});
+                fileName.textContent =
+                    "📄 " + this.files[0].name;
+
+                fileName.style.display =
+                    "block";
+
+            } else {
+
+                fileName.style.display =
+                    "none";
+
+            }
+
+        }
+    );
 
 </script>
-
-<script src="{{ url_for('static', filename='language.js') }}"></script>
 
 </body>
 </html>

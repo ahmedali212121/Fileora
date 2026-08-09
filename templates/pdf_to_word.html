@@ -1,11 +1,18 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Fileora | PDF إلى Word</title>
+    <title>NexToolia | تحويل PDF إلى Word مجانًا</title>
+
+    <meta name="description"
+          content="حوّل ملفات PDF إلى مستندات Word قابلة للتعديل بسهولة وسرعة باستخدام أداة NexToolia المجانية.">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://nextoolia.com/pdf-to-word">
 
     <style>
         * {
@@ -16,15 +23,15 @@
 
         body {
             font-family: Arial, Tahoma, sans-serif;
-            background: #181a1b;
-            color: #f1f5f9;
+            background: #0f172a;
+            color: #f8fafc;
             min-height: 100vh;
         }
 
         .navbar {
-            height: 70px;
-            background: #17191a;
-            border-bottom: 1px solid #292d31;
+            min-height: 70px;
+            background: #0f172a;
+            border-bottom: 1px solid #1e293b;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -32,9 +39,10 @@
         }
 
         .logo {
-            color: #3b82f6;
+            color: #60a5fa;
             font-size: 25px;
-            font-weight: bold;
+            font-weight: 800;
+            text-decoration: none;
         }
 
         .nav-links {
@@ -44,28 +52,19 @@
         }
 
         .nav-links a {
-            color: #d1d5db;
+            color: #cbd5e1;
             text-decoration: none;
             font-size: 14px;
         }
 
         .nav-links a:hover {
-            color: #3b82f6;
-        }
-
-        .language-btn {
-            border: 1px solid #30353a;
-            background: #202326;
-            color: #d1d5db;
-            padding: 9px 15px;
-            border-radius: 9px;
-            cursor: pointer;
+            color: #60a5fa;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 850px;
             margin: auto;
-            padding: 60px 20px;
+            padding: 60px 20px 80px;
         }
 
         .header {
@@ -78,7 +77,7 @@
             height: 85px;
             margin: 0 auto 20px;
             border-radius: 22px;
-            background: #202326;
+            background: #1e293b;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -87,34 +86,38 @@
 
         h1 {
             font-size: 40px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .description {
-            color: #9ca3af;
+            color: #cbd5e1;
             font-size: 17px;
-            line-height: 1.7;
+            line-height: 1.8;
+            max-width: 680px;
+            margin: auto;
         }
 
         .card {
-            background: #1c1f21;
-            border: 1px solid #262a2e;
+            background: #1e293b;
+            border: 1px solid #334155;
             border-radius: 25px;
             padding: 35px;
         }
 
         .drop-area {
             display: block;
-            border: 2px dashed #2563eb;
+            border: 2px dashed #3b82f6;
             border-radius: 20px;
-            background: #191c1e;
+            background: #172033;
             padding: 55px 20px;
             text-align: center;
             cursor: pointer;
+            transition: 0.2s;
         }
 
         .drop-area:hover {
-            background: #20252a;
+            background: #1d2a40;
+            border-color: #60a5fa;
         }
 
         .drop-icon {
@@ -123,15 +126,16 @@
         }
 
         .drop-title {
-            color: #3b82f6;
+            color: #60a5fa;
             font-size: 21px;
             font-weight: bold;
             margin-bottom: 10px;
         }
 
         .drop-text {
-            color: #9ca3af;
+            color: #94a3b8;
             font-size: 14px;
+            line-height: 1.7;
         }
 
         input[type="file"] {
@@ -141,11 +145,13 @@
         .file-name {
             display: none;
             margin-top: 18px;
-            background: #25292d;
-            border: 1px solid #30353a;
+            background: #172033;
+            border: 1px solid #334155;
             padding: 14px;
             border-radius: 12px;
             color: #dbeafe;
+            text-align: center;
+            word-break: break-word;
         }
 
         .btn {
@@ -159,6 +165,7 @@
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
+            transition: 0.2s;
         }
 
         .btn:hover {
@@ -169,11 +176,88 @@
             display: block;
             text-align: center;
             margin-top: 25px;
-            color: #3b82f6;
+            color: #60a5fa;
             text-decoration: none;
         }
 
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        .info {
+            margin-top: 45px;
+            color: #cbd5e1;
+            line-height: 1.9;
+        }
+
+        .info h2 {
+            color: #f8fafc;
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .info p {
+            margin-bottom: 20px;
+        }
+
+        .steps {
+            margin: 15px 0 25px;
+            padding-right: 25px;
+        }
+
+        .steps li {
+            margin-bottom: 10px;
+        }
+
+        .faq {
+            margin-top: 40px;
+        }
+
+        .faq h2 {
+            margin-bottom: 18px;
+        }
+
+        .faq-item {
+            background: #172033;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 12px;
+        }
+
+        .faq-item h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+            color: #f8fafc;
+        }
+
+        .faq-item p {
+            color: #94a3b8;
+            line-height: 1.8;
+        }
+
+        footer {
+            border-top: 1px solid #1e293b;
+            text-align: center;
+            padding: 30px 20px;
+            color: #64748b;
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 7px;
+        }
+
+        footer a:hover {
+            color: #60a5fa;
+        }
+
         @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px 5%;
+            }
 
             .nav-links a {
                 display: none;
@@ -186,165 +270,296 @@
             .card {
                 padding: 20px;
             }
+
+            .container {
+                padding-top: 45px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <nav class="navbar">
+<nav class="navbar">
 
-        <div class="logo">
-            📄 Fileora
+    <a href="/" class="logo">
+        NexToolia
+    </a>
+
+    <div class="nav-links">
+
+        <a href="/">
+            الرئيسية
+        </a>
+
+        <a href="/word-to-pdf">
+            Word إلى PDF
+        </a>
+
+        <a href="/merge-pdf">
+            دمج PDF
+        </a>
+
+        <a href="/compress-pdf">
+            ضغط PDF
+        </a>
+
+        <a href="/split-pdf">
+            تقسيم PDF
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="container">
+
+    <section class="header">
+
+        <div class="icon">
+            📄
         </div>
 
-        <div class="nav-links">
+        <h1>
+            تحويل PDF إلى Word
+        </h1>
 
-            <a href="/">الرئيسية</a>
+        <p class="description">
+            حوّل ملفات PDF إلى مستندات Word قابلة للتعديل بسهولة.
+            ارفع ملفك وابدأ التحويل باستخدام أداة NexToolia المجانية.
+        </p>
 
-            <a href="/word-to-pdf">
-                Word إلى PDF
-            </a>
-
-            <a href="/merge-pdf">
-                دمج PDF
-            </a>
-
-            <a href="/compress-pdf">
-                ضغط PDF
-            </a>
-
-            <a href="/split-pdf">
-                تقسيم PDF
-            </a>
-
-            <button
-                class="language-btn"
-                id="languageBtn"
-                onclick="toggleLanguage()">
-                English
-            </button>
-
-        </div>
-
-    </nav>
+    </section>
 
 
-    <main class="container">
+    <section class="card">
 
-        <div class="header">
+        <form
+            method="POST"
+            enctype="multipart/form-data">
 
-            <div class="icon">
-                📄
-            </div>
+            <label
+                class="drop-area"
+                for="pdf_file">
 
-            <h1>
-                تحويل PDF إلى Word
-            </h1>
-
-            <p class="description">
-                حوّل ملف PDF إلى مستند Word قابل للتعديل بسهولة.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <form
-                method="POST"
-                enctype="multipart/form-data">
-
-                <label
-                    class="drop-area"
-                    for="pdf_file">
-
-                    <div class="drop-icon">
-                        📁
-                    </div>
-
-                    <div class="drop-title">
-                        اختر ملف PDF
-                    </div>
-
-                    <div class="drop-text">
-                        اضغط هنا لاختيار ملف PDF من جهازك
-                    </div>
-
-                </label>
-
-
-                <input
-                    type="file"
-                    id="pdf_file"
-                    name="pdf_file"
-                    accept=".pdf"
-                    required>
-
-
-                <div
-                    class="file-name"
-                    id="fileName">
+                <div class="drop-icon">
+                    📄
                 </div>
 
+                <div class="drop-title">
+                    اختر ملف PDF
+                </div>
 
-                <button
-                    class="btn"
-                    type="submit">
+                <div class="drop-text">
+                    اضغط هنا لاختيار ملف PDF من جهازك
+                </div>
 
-                    تحويل إلى Word
-
-                </button>
-
-            </form>
-
-
-            <a
-                href="/"
-                class="back">
-
-                ← العودة إلى Fileora
-
-            </a>
-
-        </div>
-
-    </main>
+            </label>
 
 
-    <script>
+            <input
+                type="file"
+                id="pdf_file"
+                name="pdf_file"
+                accept=".pdf,application/pdf"
+                required>
 
-        const input =
-            document.getElementById("pdf_file");
 
-        const fileName =
-            document.getElementById("fileName");
+            <div
+                class="file-name"
+                id="fileName">
+            </div>
 
 
-        input.addEventListener(
-            "change",
-            function () {
+            <button
+                class="btn"
+                type="submit">
 
-                if (this.files.length) {
+                تحويل إلى Word
 
-                    fileName.textContent =
-                        "📄 " + this.files[0].name;
+            </button>
 
-                    fileName.style.display =
-                        "block";
+        </form>
 
-                }
 
+        <a
+            href="/"
+            class="back">
+
+            ← العودة إلى NexToolia
+
+        </a>
+
+    </section>
+
+
+    <section class="info">
+
+        <h2>
+            ما هي أداة تحويل PDF إلى Word؟
+        </h2>
+
+        <p>
+            تتيح لك أداة NexToolia تحويل ملفات PDF إلى مستندات Word
+            بسهولة، مما يساعدك على تعديل النصوص والعمل على محتوى
+            المستند بعد التحويل.
+        </p>
+
+
+        <h2>
+            كيفية تحويل PDF إلى Word
+        </h2>
+
+        <ol class="steps">
+
+            <li>
+                اضغط على مربع اختيار الملف.
+            </li>
+
+            <li>
+                اختر ملف PDF من جهازك.
+            </li>
+
+            <li>
+                اضغط على زر «تحويل إلى Word».
+            </li>
+
+            <li>
+                انتظر حتى تكتمل عملية التحويل وسيتم تنزيل ملف Word.
+            </li>
+
+        </ol>
+
+
+        <h2>
+            لماذا تستخدم NexToolia؟
+        </h2>
+
+        <p>
+            صُممت NexToolia لتوفير أدوات بسيطة وسريعة للتعامل مع
+            ملفات PDF والمستندات دون الحاجة إلى خطوات معقدة.
+            يمكنك استخدام الأدوات مباشرة من المتصفح.
+        </p>
+
+
+        <section class="faq">
+
+            <h2>
+                الأسئلة الشائعة
+            </h2>
+
+            <div class="faq-item">
+
+                <h3>
+                    هل أداة PDF إلى Word مجانية؟
+                </h3>
+
+                <p>
+                    نعم، يمكنك استخدام أداة تحويل PDF إلى Word
+                    مجانًا من خلال موقع NexToolia.
+                </p>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <h3>
+                    ما نوع الملفات التي يمكن تحويلها؟
+                </h3>
+
+                <p>
+                    الأداة مخصصة لملفات PDF، ويجب أن يكون الملف
+                    بامتداد PDF.
+                </p>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <h3>
+                    هل أحتاج إلى تثبيت برنامج؟
+                </h3>
+
+                <p>
+                    لا، تعمل الأداة من خلال المتصفح ولا تحتاج إلى
+                    تثبيت برنامج إضافي على جهازك.
+                </p>
+
+            </div>
+
+        </section>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 NexToolia - جميع الحقوق محفوظة
+    </p>
+
+    <p style="margin-top: 12px;">
+
+        <a href="/privacy">
+            الخصوصية
+        </a>
+
+        <a href="/terms">
+            الشروط
+        </a>
+
+        <a href="/about">
+            من نحن
+        </a>
+
+        <a href="/contact">
+            اتصل بنا
+        </a>
+
+    </p>
+
+</footer>
+
+
+<script>
+
+    const input =
+        document.getElementById("pdf_file");
+
+    const fileName =
+        document.getElementById("fileName");
+
+
+    input.addEventListener(
+        "change",
+        function () {
+
+            if (this.files.length) {
+
+                fileName.textContent =
+                    "📄 " + this.files[0].name;
+
+                fileName.style.display =
+                    "block";
+
+            } else {
+
+                fileName.textContent = "";
+
+                fileName.style.display =
+                    "none";
             }
-        );
 
-    </script>
+        }
+    );
 
-
-    <script
-        src="{{ url_for('static', filename='language.js') }}">
-    </script>
+</script>
 
 </body>
-
 </html>
+```

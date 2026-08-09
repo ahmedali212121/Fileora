@@ -1,264 +1,545 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fileora | ضغط PDF</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
+    <title>NexToolia | ضغط ملفات PDF</title>
 
-body{
-font-family:Arial,Tahoma,sans-serif;
-background:#181a1b;
-color:#f1f5f9;
-min-height:100vh
-}
+    <meta name="description"
+          content="قلل حجم ملفات PDF بسهولة وسرعة باستخدام أداة NexToolia المجانية لضغط ملفات PDF.">
 
-.navbar{
-height:70px;
-background:#17191a;
-border-bottom:1px solid #292d31;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 6%
-}
+    <meta name="robots" content="index, follow">
 
-.logo{
-color:#3b82f6;
-font-size:25px;
-font-weight:bold
-}
+    <link rel="canonical" href="https://nextoolia.com/compress-pdf">
 
-.nav-links{
-display:flex;
-align-items:center;
-gap:18px
-}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-.nav-links a{
-color:#d1d5db;
-text-decoration:none;
-font-size:14px
-}
+        body {
+            font-family: Arial, Tahoma, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            min-height: 100vh;
+        }
 
-.language-btn{
-border:1px solid #30353a;
-background:#202326;
-color:#d1d5db;
-padding:9px 15px;
-border-radius:9px;
-cursor:pointer
-}
+        .navbar {
+            min-height: 70px;
+            background: #0f172a;
+            border-bottom: 1px solid #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+        }
 
-.container{
-max-width:800px;
-margin:auto;
-padding:60px 20px
-}
+        .logo {
+            color: #60a5fa;
+            font-size: 25px;
+            font-weight: 800;
+            text-decoration: none;
+        }
 
-.header{
-text-align:center;
-margin-bottom:35px
-}
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
 
-.icon{
-width:85px;
-height:85px;
-margin:0 auto 20px;
-border-radius:22px;
-background:#202326;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:43px
-}
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+        }
 
-h1{
-font-size:40px;
-margin-bottom:12px
-}
+        .nav-links a:hover {
+            color: #60a5fa;
+        }
 
-.description{
-color:#9ca3af;
-font-size:17px;
-line-height:1.7
-}
+        .container {
+            max-width: 850px;
+            margin: auto;
+            padding: 60px 20px 80px;
+        }
 
-.card{
-background:#1c1f21;
-border:1px solid #262a2e;
-border-radius:25px;
-padding:35px
-}
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
 
-.drop-area{
-display:block;
-border:2px dashed #2563eb;
-border-radius:20px;
-background:#191c1e;
-padding:55px 20px;
-text-align:center;
-cursor:pointer
-}
+        .icon {
+            width: 85px;
+            height: 85px;
+            margin: 0 auto 20px;
+            border-radius: 22px;
+            background: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 43px;
+        }
 
-.drop-icon{
-font-size:50px;
-margin-bottom:15px
-}
+        h1 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
 
-.drop-title{
-color:#3b82f6;
-font-size:21px;
-font-weight:bold;
-margin-bottom:10px
-}
+        .description {
+            color: #cbd5e1;
+            font-size: 17px;
+            line-height: 1.8;
+            max-width: 680px;
+            margin: auto;
+        }
 
-.drop-text{
-color:#9ca3af;
-font-size:14px
-}
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 25px;
+            padding: 35px;
+        }
 
-input[type=file]{
-display:none
-}
+        .drop-area {
+            display: block;
+            border: 2px dashed #3b82f6;
+            border-radius: 20px;
+            background: #172033;
+            padding: 55px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
 
-.file-name{
-display:none;
-margin-top:18px;
-background:#25292d;
-border:1px solid #30353a;
-padding:14px;
-border-radius:12px;
-color:#dbeafe
-}
+        .drop-area:hover {
+            background: #1d2a40;
+            border-color: #60a5fa;
+        }
 
-.btn{
-width:100%;
-margin-top:22px;
-padding:17px;
-border:0;
-border-radius:13px;
-background:#2563eb;
-color:white;
-font-size:18px;
-font-weight:bold;
-cursor:pointer
-}
+        .drop-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
 
-.back{
-display:block;
-text-align:center;
-margin-top:25px;
-color:#3b82f6;
-text-decoration:none
-}
+        .drop-title {
+            color: #60a5fa;
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-@media(max-width:700px){
-.nav-links a{display:none}
-h1{font-size:31px}
-.card{padding:20px}
-}
-</style>
+        .drop-text {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-name {
+            display: none;
+            margin-top: 18px;
+            background: #172033;
+            border: 1px solid #334155;
+            padding: 14px;
+            border-radius: 12px;
+            color: #dbeafe;
+            word-break: break-word;
+        }
+
+        .btn {
+            width: 100%;
+            margin-top: 22px;
+            padding: 17px;
+            border: 0;
+            border-radius: 13px;
+            background: #2563eb;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+
+        .info {
+            margin-top: 45px;
+            color: #cbd5e1;
+            line-height: 1.9;
+        }
+
+        .info h2 {
+            color: #f8fafc;
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .info p {
+            margin-bottom: 20px;
+        }
+
+        .steps {
+            margin: 15px 0 25px;
+            padding-right: 25px;
+        }
+
+        .steps li {
+            margin-bottom: 10px;
+        }
+
+        .faq {
+            margin-top: 40px;
+        }
+
+        .faq h2 {
+            margin-bottom: 18px;
+        }
+
+        .faq-item {
+            background: #172033;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 12px;
+        }
+
+        .faq-item h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .faq-item p {
+            color: #94a3b8;
+            line-height: 1.8;
+        }
+
+        footer {
+            border-top: 1px solid #1e293b;
+            text-align: center;
+            padding: 30px 20px;
+            color: #64748b;
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 7px;
+        }
+
+        footer a:hover {
+            color: #60a5fa;
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px 5%;
+            }
+
+            .nav-links a {
+                display: none;
+            }
+
+            h1 {
+                font-size: 31px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .container {
+                padding-top: 45px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <nav class="navbar">
 
-<div class="logo">📄 Fileora</div>
+    <a href="/" class="logo">
+        NexToolia
+    </a>
 
-<div class="nav-links">
+    <div class="nav-links">
 
-<a href="/">الرئيسية</a>
-<a href="/pdf-to-word">PDF إلى Word</a>
-<a href="/word-to-pdf">Word إلى PDF</a>
-<a href="/merge-pdf">دمج PDF</a>
-<a href="/split-pdf">تقسيم PDF</a>
+        <a href="/">الرئيسية</a>
 
-<button class="language-btn" id="languageBtn" onclick="toggleLanguage()">
-English
-</button>
+        <a href="/pdf-to-word">PDF إلى Word</a>
 
-</div>
+        <a href="/word-to-pdf">Word إلى PDF</a>
+
+        <a href="/merge-pdf">دمج PDF</a>
+
+        <a href="/split-pdf">تقسيم PDF</a>
+
+    </div>
+
 </nav>
+
 
 <main class="container">
 
-<div class="header">
+    <section class="header">
 
-<div class="icon">🗜️</div>
+        <div class="icon">
+            🗜️
+        </div>
 
-<h1>ضغط ملف PDF</h1>
+        <h1>
+            ضغط ملفات PDF
+        </h1>
 
-<p class="description">
-قلل حجم ملف PDF بسهولة.
-</p>
+        <p class="description">
+            قلل حجم ملفات PDF لتسهيل مشاركتها ورفعها
+            مع أداة NexToolia المجانية.
+        </p>
 
-</div>
+    </section>
 
-<div class="card">
 
-<form method="POST" enctype="multipart/form-data">
+    <section class="card">
 
-<label class="drop-area" for="pdf_file">
+        <form
+            method="POST"
+            enctype="multipart/form-data">
 
-<div class="drop-icon">📁</div>
+            <label
+                class="drop-area"
+                for="pdf_file">
 
-<div class="drop-title">
-اختر ملف PDF
-</div>
+                <div class="drop-icon">
+                    🗜️
+                </div>
 
-<div class="drop-text">
-اختر ملف PDF من جهازك
-</div>
+                <div class="drop-title">
+                    اختر ملف PDF
+                </div>
 
-</label>
+                <div class="drop-text">
+                    اضغط هنا لاختيار ملف PDF من جهازك
+                </div>
 
-<input
-type="file"
-id="pdf_file"
-name="pdf_file"
-accept=".pdf"
-required
->
+            </label>
 
-<div class="file-name" id="fileName"></div>
 
-<button class="btn" type="submit">
-ضغط ملف PDF
-</button>
+            <input
+                type="file"
+                id="pdf_file"
+                name="pdf_file"
+                accept=".pdf,application/pdf"
+                required>
 
-</form>
 
-<a href="/" class="back">
-← العودة إلى Fileora
-</a>
+            <div
+                class="file-name"
+                id="fileName">
+            </div>
 
-</div>
+
+            <button
+                class="btn"
+                type="submit">
+
+                ضغط ملف PDF
+
+            </button>
+
+        </form>
+
+
+        <a
+            href="/"
+            class="back">
+
+            ← العودة إلى NexToolia
+
+        </a>
+
+    </section>
+
+
+    <section class="info">
+
+        <h2>
+            ما هي أداة ضغط PDF؟
+        </h2>
+
+        <p>
+            تساعدك أداة NexToolia على تقليل حجم ملف PDF
+            لتسهيل تخزينه ومشاركته ورفعه إلى المواقع
+            والخدمات المختلفة.
+        </p>
+
+
+        <h2>
+            كيفية ضغط ملف PDF
+        </h2>
+
+        <ol class="steps">
+
+            <li>
+                اضغط على مربع اختيار الملف.
+            </li>
+
+            <li>
+                اختر ملف PDF من جهازك.
+            </li>
+
+            <li>
+                تأكد من ظهور اسم الملف.
+            </li>
+
+            <li>
+                اضغط على زر «ضغط ملف PDF».
+            </li>
+
+            <li>
+                سيتم إنشاء ملف PDF مضغوط يمكنك حفظه.
+            </li>
+
+        </ol>
+
+
+        <h2>
+            لماذا تستخدم NexToolia؟
+        </h2>
+
+        <p>
+            توفر NexToolia أدوات بسيطة وسهلة للتعامل
+            مع ملفات PDF والمستندات دون خطوات معقدة.
+        </p>
+
+
+        <section class="faq">
+
+            <h2>
+                الأسئلة الشائعة
+            </h2>
+
+            <div class="faq-item">
+
+                <h3>
+                    هل أداة ضغط PDF مجانية؟
+                </h3>
+
+                <p>
+                    نعم، أداة ضغط PDF متاحة مجانًا
+                    عبر موقع NexToolia.
+                </p>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <h3>
+                    لماذا أحتاج إلى ضغط ملف PDF؟
+                </h3>
+
+                <p>
+                    تقليل حجم الملف يمكن أن يسهل إرساله
+                    بالبريد الإلكتروني ورفعه ومشاركته.
+                </p>
+
+            </div>
+
+
+            <div class="faq-item">
+
+                <h3>
+                    هل يتغير محتوى الملف؟
+                </h3>
+
+                <p>
+                    تعمل الأداة على تقليل حجم الملف قدر الإمكان
+                    مع الحفاظ على صفحات PDF ومحتواها.
+                </p>
+
+            </div>
+
+        </section>
+
+    </section>
+
 </main>
+
+
+<footer>
+
+    <p>
+        © 2026 NexToolia - جميع الحقوق محفوظة
+    </p>
+
+    <p style="margin-top: 12px;">
+
+        <a href="/privacy">الخصوصية</a>
+
+        <a href="/terms">الشروط</a>
+
+        <a href="/about">من نحن</a>
+
+        <a href="/contact">اتصل بنا</a>
+
+    </p>
+
+</footer>
+
 
 <script>
 
-const input=document.getElementById("pdf_file");
-const fileName=document.getElementById("fileName");
+    const input =
+        document.getElementById("pdf_file");
 
-input.addEventListener("change",function(){
+    const fileName =
+        document.getElementById("fileName");
 
-if(this.files.length){
 
-fileName.textContent="📄 "+this.files[0].name;
-fileName.style.display="block";
+    input.addEventListener(
+        "change",
+        function () {
 
-}
+            if (this.files.length) {
 
-});
+                fileName.textContent =
+                    "📄 " + this.files[0].name;
+
+                fileName.style.display =
+                    "block";
+
+            } else {
+
+                fileName.style.display =
+                    "none";
+
+            }
+
+        }
+    );
 
 </script>
-
-<script src="{{ url_for('static', filename='language.js') }}"></script>
 
 </body>
 </html>

@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fileora | PDF to Word</title>
+    <title>NexToolia | PDF to Word</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
@@ -13,11 +13,11 @@
 
 <div class="box">
 
-    <h1>📄 Fileora</h1>
+    <h1>ðŸ“„ NexToolia</h1>
 
-    <h2>تحويل PDF إلى Word</h2>
+    <h2>ØªØ­ÙˆÙŠÙ„ PDF Ø¥Ù„Ù‰ Word</h2>
 
-    <p>حوّل ملفات PDF إلى Word بسهولة وسرعة.</p>
+    <p>Ø­ÙˆÙ‘Ù„ Ù…Ù„ÙØ§Øª PDF Ø¥Ù„Ù‰ Word Ø¨Ø³Ù‡ÙˆÙ„Ø© ÙˆØ³Ø±Ø¹Ø©.</p>
 
     <form id="uploadForm" method="POST" enctype="multipart/form-data">
 
@@ -30,30 +30,30 @@
                 accept=".pdf"
                 required>
 
-            <div class="icon">📂</div>
+            <div class="icon">ðŸ“‚</div>
 
-            <h3>اسحب ملف PDF هنا</h3>
+            <h3>Ø§Ø³Ø­Ø¨ Ù…Ù„Ù PDF Ù‡Ù†Ø§</h3>
 
-            <p>أو اضغط لاختيار الملف</p>
+            <p>Ø£Ùˆ Ø§Ø¶ØºØ· Ù„Ø§Ø®ØªÙŠØ§Ø± Ø§Ù„Ù…Ù„Ù</p>
 
             <span id="file-name">
-                لم يتم اختيار أي ملف
+                Ù„Ù… ÙŠØªÙ… Ø§Ø®ØªÙŠØ§Ø± Ø£ÙŠ Ù…Ù„Ù
             </span>
 
         </label>
 
         <button id="convertBtn" type="submit">
-            🚀 تحويل إلى Word
+            ðŸš€ ØªØ­ÙˆÙŠÙ„ Ø¥Ù„Ù‰ Word
         </button>
 
     </form>
 
     <div id="loading" class="loading">
-        ⏳ جاري تحويل الملف... يرجى الانتظار
+        â³ Ø¬Ø§Ø±ÙŠ ØªØ­ÙˆÙŠÙ„ Ø§Ù„Ù…Ù„Ù... ÙŠØ±Ø¬Ù‰ Ø§Ù„Ø§Ù†ØªØ¸Ø§Ø±
     </div>
 
     <div class="footer">
-        © 2026 Fileora
+        Â© 2026 NexToolia
     </div>
 
 </div>
@@ -70,7 +70,7 @@ input.addEventListener("change", function(){
 
     if(this.files.length){
 
-        fileName.innerHTML="✅ "+this.files[0].name;
+        fileName.innerHTML="âœ… "+this.files[0].name;
 
     }
 
@@ -82,7 +82,7 @@ form.addEventListener("submit",function(){
 
     button.disabled=true;
 
-    button.innerHTML="جاري التحويل...";
+    button.innerHTML="Ø¬Ø§Ø±ÙŠ Ø§Ù„ØªØ­ÙˆÙŠÙ„...";
 
 });
 
