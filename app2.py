@@ -34,10 +34,7 @@ Allow: /
 
 Sitemap: https://nextoolia.com/sitemap.xml
 """
-    return Response(
-        content,
-        mimetype="text/plain"
-    )
+    return Response(content, mimetype="text/plain")
 
 
 # =========================================================
@@ -48,10 +45,7 @@ Sitemap: https://nextoolia.com/sitemap.xml
 def ads_txt():
     content = """google.com, pub-5168430877675005, DIRECT, f08c47fec0942fa0
 """
-    return Response(
-        content,
-        mimetype="text/plain"
-    )
+    return Response(content, mimetype="text/plain")
 
 
 # =========================================================
@@ -105,10 +99,7 @@ def sitemap_xml():
 
 </urlset>
 """
-    return Response(
-        content,
-        mimetype="application/xml"
-    )
+    return Response(content, mimetype="application/xml")
 
 
 # =========================================================
@@ -471,7 +462,6 @@ def split_pdf():
                 start_page - 1,
                 end_page
             ):
-
                 writer.add_page(
                     reader.pages[page_number]
                 )
