@@ -14,13 +14,19 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 
+# =========================================================
 # الصفحة الرئيسية
+# =========================================================
+
 @app.route("/")
 def home():
     return render_template("home.html")
 
 
+# =========================================================
 # robots.txt
+# =========================================================
+
 @app.route("/robots.txt")
 def robots_txt():
     content = """User-agent: *
@@ -28,10 +34,30 @@ Allow: /
 
 Sitemap: https://nextoolia.com/sitemap.xml
 """
-    return Response(content, mimetype="text/plain")
+    return Response(
+        content,
+        mimetype="text/plain"
+    )
 
 
+# =========================================================
+# ads.txt
+# =========================================================
+
+@app.route("/ads.txt")
+def ads_txt():
+    content = """google.com, pub-5168430877675005, DIRECT, f08c47fec0942fa0
+"""
+    return Response(
+        content,
+        mimetype="text/plain"
+    )
+
+
+# =========================================================
 # sitemap.xml
+# =========================================================
+
 @app.route("/sitemap.xml")
 def sitemap_xml():
     content = """<?xml version="1.0" encoding="UTF-8"?>
@@ -79,34 +105,52 @@ def sitemap_xml():
 
 </urlset>
 """
-    return Response(content, mimetype="application/xml")
+    return Response(
+        content,
+        mimetype="application/xml"
+    )
 
 
+# =========================================================
 # سياسة الخصوصية
+# =========================================================
+
 @app.route("/privacy")
 def privacy():
     return render_template("privacy.html")
 
 
+# =========================================================
 # شروط الاستخدام
+# =========================================================
+
 @app.route("/terms")
 def terms():
     return render_template("terms.html")
 
 
+# =========================================================
 # من نحن
+# =========================================================
+
 @app.route("/about")
 def about():
     return render_template("about.html")
 
 
+# =========================================================
 # اتصل بنا
+# =========================================================
+
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
 
 
+# =========================================================
 # PDF إلى Word
+# =========================================================
+
 @app.route("/pdf-to-word", methods=["GET", "POST"])
 def pdf_to_word():
 
@@ -157,7 +201,10 @@ def pdf_to_word():
     return render_template("pdf_to_word.html")
 
 
+# =========================================================
 # Word إلى PDF
+# =========================================================
+
 @app.route("/word-to-pdf", methods=["GET", "POST"])
 def word_to_pdf():
 
@@ -217,7 +264,10 @@ def word_to_pdf():
     return render_template("word_to_pdf.html")
 
 
+# =========================================================
 # دمج PDF
+# =========================================================
+
 @app.route("/merge-pdf", methods=["GET", "POST"])
 def merge_pdf():
 
@@ -289,7 +339,10 @@ def merge_pdf():
     return render_template("merge_pdf.html")
 
 
+# =========================================================
 # ضغط PDF
+# =========================================================
+
 @app.route("/compress-pdf", methods=["GET", "POST"])
 def compress_pdf():
 
@@ -354,7 +407,10 @@ def compress_pdf():
     return render_template("compress_pdf.html")
 
 
+# =========================================================
 # تقسيم PDF
+# =========================================================
+
 @app.route("/split-pdf", methods=["GET", "POST"])
 def split_pdf():
 
@@ -415,6 +471,7 @@ def split_pdf():
                 start_page - 1,
                 end_page
             ):
+
                 writer.add_page(
                     reader.pages[page_number]
                 )
@@ -439,7 +496,10 @@ def split_pdf():
     return render_template("split_pdf.html")
 
 
+# =========================================================
 # تشغيل التطبيق
+# =========================================================
+
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
