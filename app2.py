@@ -23,11 +23,9 @@ def home():
 def robots_txt():
     content = """User-agent: *
 Allow: /
-26  Sitemap: https://nextoolia.com/sitemap.xml
+Sitemap: https://nextoolia.com/sitemap.xml
 """
     return Response(content, mimetype="text/plain")
-
-
 @app.route("/ads.txt")
 def ads_txt():
     content = """google.com, pub-5168430877675005, DIRECT, f08c47fec0942fa0
@@ -45,7 +43,7 @@ def sitemap_xml():
     </url>
 
     <url>
-        <loc>https://nextoolia.com/pdf-to-word</loc>
+    <loc>https://nextoolia.com/pdf-to-word</loc>
     </url>
 
     <url>
@@ -401,3 +399,4 @@ if __name__ == "__main__":
         host="0.0.0.0",
         port=int(os.environ.get("PORT", 5000))
     )
+
