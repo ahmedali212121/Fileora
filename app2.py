@@ -21,17 +21,11 @@ def home():
 
 @app.route("/robots.txt")
 def robots_txt():
-    content = """User-agent: *
+    return """User-agent: *
 Allow: /
+
 Sitemap: https://nextoolia.com/sitemap.xml
 """
-    return Response(content, mimetype="text/plain")
-@app.route("/ads.txt")
-def ads_txt():
-    content = """google.com, pub-5168430877675005, DIRECT, f08c47fec0942fa0
-"""
-    return Response(content, mimetype="text/plain")
-
 
 @app.route("/sitemap.xml")
 def sitemap_xml():
@@ -399,5 +393,6 @@ if __name__ == "__main__":
         host="0.0.0.0",
         port=int(os.environ.get("PORT", 5000))
     )
+
 
 
