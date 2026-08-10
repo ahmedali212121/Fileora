@@ -23,7 +23,7 @@ def home():
 def robots_txt():
     content = """User-agent: *
 Allow: /
-Sitemap: https://nextoolia.com/sitemap.xml
+26  Sitemap: https://nextoolia.com/sitemap.xml
 """
     return Response(content, mimetype="text/plain")
 
