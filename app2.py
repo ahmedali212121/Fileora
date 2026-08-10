@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file, render_template, Response
+﻿from flask import Flask, request, send_file, render_template, Response
 from pdf2docx import Converter
 from docx2pdf import convert
 from pypdf import PdfWriter, PdfReader
@@ -15,7 +15,7 @@ os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 
 # =========================================================
-# الصفحة الرئيسية
+# Ø§Ù„ØµÙØ­Ø© Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©
 # =========================================================
 
 @app.route("/")
@@ -103,7 +103,7 @@ def sitemap_xml():
 
 
 # =========================================================
-# سياسة الخصوصية
+# Ø³ÙŠØ§Ø³Ø© Ø§Ù„Ø®ØµÙˆØµÙŠØ©
 # =========================================================
 
 @app.route("/privacy")
@@ -112,7 +112,7 @@ def privacy():
 
 
 # =========================================================
-# شروط الاستخدام
+# Ø´Ø±ÙˆØ· Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…
 # =========================================================
 
 @app.route("/terms")
@@ -121,7 +121,7 @@ def terms():
 
 
 # =========================================================
-# من نحن
+# Ù…Ù† Ù†Ø­Ù†
 # =========================================================
 
 @app.route("/about")
@@ -130,7 +130,7 @@ def about():
 
 
 # =========================================================
-# اتصل بنا
+# Ø§ØªØµÙ„ Ø¨Ù†Ø§
 # =========================================================
 
 @app.route("/contact")
@@ -139,7 +139,7 @@ def contact():
 
 
 # =========================================================
-# PDF إلى Word
+# PDF Ø¥Ù„Ù‰ Word
 # =========================================================
 
 @app.route("/pdf-to-word", methods=["GET", "POST"])
@@ -150,10 +150,10 @@ def pdf_to_word():
         file = request.files.get("pdf_file")
 
         if not file or file.filename == "":
-            return "لم يتم اختيار ملف PDF"
+            return "Ù„Ù… ÙŠØªÙ… Ø§Ø®ØªÙŠØ§Ø± Ù…Ù„Ù PDF"
 
         if not file.filename.lower().endswith(".pdf"):
-            return "يرجى اختيار ملف PDF فقط"
+            return "ÙŠØ±Ø¬Ù‰ Ø§Ø®ØªÙŠØ§Ø± Ù…Ù„Ù PDF ÙÙ‚Ø·"
 
         file_id = str(uuid.uuid4())
 
@@ -184,16 +184,16 @@ def pdf_to_word():
         except Exception as e:
 
             return f"""
-            <h2>حدث خطأ</h2>
+            <h2>Ø­Ø¯Ø« Ø®Ø·Ø£</h2>
             <p>{e}</p>
-            <a href="/pdf-to-word">العودة</a>
+            <a href="/pdf-to-word">Ø§Ù„Ø¹ÙˆØ¯Ø©</a>
             """
 
     return render_template("pdf_to_word.html")
 
 
 # =========================================================
-# Word إلى PDF
+# Word Ø¥Ù„Ù‰ PDF
 # =========================================================
 
 @app.route("/word-to-pdf", methods=["GET", "POST"])
@@ -204,7 +204,7 @@ def word_to_pdf():
         file = request.files.get("word_file")
 
         if not file or file.filename == "":
-            return "لم يتم اختيار ملف Word"
+            return "Ù„Ù… ÙŠØªÙ… Ø§Ø®ØªÙŠØ§Ø± Ù…Ù„Ù Word"
 
         filename = file.filename.lower()
 
@@ -212,7 +212,7 @@ def word_to_pdf():
             filename.endswith(".docx")
             or filename.endswith(".doc")
         ):
-            return "يرجى اختيار ملف Word فقط"
+            return "ÙŠØ±Ø¬Ù‰ Ø§Ø®ØªÙŠØ§Ø± Ù…Ù„Ù Word ÙÙ‚Ø·"
 
         file_id = str(uuid.uuid4())
 
@@ -247,16 +247,16 @@ def word_to_pdf():
         except Exception as e:
 
             return f"""
-            <h2>حدث خطأ أثناء التحويل</h2>
+            <h2>Ø­Ø¯Ø« Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ø§Ù„ØªØ­ÙˆÙŠÙ„</h2>
             <p>{e}</p>
-            <a href="/word-to-pdf">العودة</a>
+            <a href="/word-to-pdf">Ø§Ù„Ø¹ÙˆØ¯Ø©</a>
             """
 
     return render_template("word_to_pdf.html")
 
 
 # =========================================================
-# دمج PDF
+# Ø¯Ù…Ø¬ PDF
 # =========================================================
 
 @app.route("/merge-pdf", methods=["GET", "POST"])
@@ -273,7 +273,7 @@ def merge_pdf():
         ]
 
         if len(files) < 2:
-            return "اختر ملفين PDF على الأقل"
+            return "Ø§Ø®ØªØ± Ù…Ù„ÙÙŠÙ† PDF Ø¹Ù„Ù‰ Ø§Ù„Ø£Ù‚Ù„"
 
         file_id = str(uuid.uuid4())
 
@@ -284,7 +284,7 @@ def merge_pdf():
             for index, file in enumerate(files):
 
                 if not file.filename.lower().endswith(".pdf"):
-                    return "جميع الملفات يجب أن تكون PDF"
+                    return "Ø¬Ù…ÙŠØ¹ Ø§Ù„Ù…Ù„ÙØ§Øª ÙŠØ¬Ø¨ Ø£Ù† ØªÙƒÙˆÙ† PDF"
 
                 path = os.path.join(
                     UPLOAD_FOLDER,
@@ -322,16 +322,16 @@ def merge_pdf():
         except Exception as e:
 
             return f"""
-            <h2>حدث خطأ أثناء الدمج</h2>
+            <h2>Ø­Ø¯Ø« Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ø§Ù„Ø¯Ù…Ø¬</h2>
             <p>{e}</p>
-            <a href="/merge-pdf">العودة</a>
+            <a href="/merge-pdf">Ø§Ù„Ø¹ÙˆØ¯Ø©</a>
             """
 
     return render_template("merge_pdf.html")
 
 
 # =========================================================
-# ضغط PDF
+# Ø¶ØºØ· PDF
 # =========================================================
 
 @app.route("/compress-pdf", methods=["GET", "POST"])
@@ -342,10 +342,10 @@ def compress_pdf():
         file = request.files.get("pdf_file")
 
         if not file or file.filename == "":
-            return "لم يتم اختيار ملف PDF"
+            return "Ù„Ù… ÙŠØªÙ… Ø§Ø®ØªÙŠØ§Ø± Ù…Ù„Ù PDF"
 
         if not file.filename.lower().endswith(".pdf"):
-            return "يرجى اختيار ملف PDF"
+            return "ÙŠØ±Ø¬Ù‰ Ø§Ø®ØªÙŠØ§Ø± Ù…Ù„Ù PDF"
 
         file_id = str(uuid.uuid4())
 
@@ -390,16 +390,16 @@ def compress_pdf():
         except Exception as e:
 
             return f"""
-            <h2>حدث خطأ أثناء الضغط</h2>
+            <h2>Ø­Ø¯Ø« Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ø§Ù„Ø¶ØºØ·</h2>
             <p>{e}</p>
-            <a href="/compress-pdf">العودة</a>
+            <a href="/compress-pdf">Ø§Ù„Ø¹ÙˆØ¯Ø©</a>
             """
 
     return render_template("compress_pdf.html")
 
 
 # =========================================================
-# تقسيم PDF
+# ØªÙ‚Ø³ÙŠÙ… PDF
 # =========================================================
 
 @app.route("/split-pdf", methods=["GET", "POST"])
@@ -413,10 +413,10 @@ def split_pdf():
         end_page = request.form.get("end_page")
 
         if not file or file.filename == "":
-            return "لم يتم اختيار ملف PDF"
+            return "Ù„Ù… ÙŠØªÙ… Ø§Ø®ØªÙŠØ§Ø± Ù…Ù„Ù PDF"
 
         if not file.filename.lower().endswith(".pdf"):
-            return "يرجى اختيار ملف PDF فقط"
+            return "ÙŠØ±Ø¬Ù‰ Ø§Ø®ØªÙŠØ§Ø± Ù…Ù„Ù PDF ÙÙ‚Ø·"
 
         try:
 
@@ -425,10 +425,10 @@ def split_pdf():
 
         except (TypeError, ValueError):
 
-            return "أدخل أرقام صفحات صحيحة"
+            return "Ø£Ø¯Ø®Ù„ Ø£Ø±Ù‚Ø§Ù… ØµÙØ­Ø§Øª ØµØ­ÙŠØ­Ø©"
 
         if start_page < 1 or end_page < start_page:
-            return "نطاق الصفحات غير صحيح"
+            return "Ù†Ø·Ø§Ù‚ Ø§Ù„ØµÙØ­Ø§Øª ØºÙŠØ± ØµØ­ÙŠØ­"
 
         file_id = str(uuid.uuid4())
 
@@ -447,8 +447,8 @@ def split_pdf():
 
             if end_page > total_pages:
                 return (
-                    f"الملف يحتوي على "
-                    f"{total_pages} صفحات فقط"
+                    f"Ø§Ù„Ù…Ù„Ù ÙŠØ­ØªÙˆÙŠ Ø¹Ù„Ù‰ "
+                    f"{total_pages} ØµÙØ­Ø§Øª ÙÙ‚Ø·"
                 )
 
             output_path = os.path.join(
@@ -478,16 +478,16 @@ def split_pdf():
         except Exception as e:
 
             return f"""
-            <h2>حدث خطأ أثناء تقسيم PDF</h2>
+            <h2>Ø­Ø¯Ø« Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ ØªÙ‚Ø³ÙŠÙ… PDF</h2>
             <p>{e}</p>
-            <a href="/split-pdf">العودة</a>
+            <a href="/split-pdf">Ø§Ù„Ø¹ÙˆØ¯Ø©</a>
             """
 
     return render_template("split_pdf.html")
 
 
 # =========================================================
-# تشغيل التطبيق
+# ØªØ´ØºÙŠÙ„ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚
 # =========================================================
 
 if __name__ == "__main__":
@@ -495,3 +495,5 @@ if __name__ == "__main__":
         host="0.0.0.0",
         port=int(os.environ.get("PORT", 5000))
     )
+
+
