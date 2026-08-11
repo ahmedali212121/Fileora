@@ -1,4 +1,4 @@
-﻿from flask import Flask, request, send_file, render_template, Response
+from flask import Flask, request, send_file, render_template, Response
 from pdf2docx import Converter
 from docx2pdf import convert
 from pypdf import PdfWriter, PdfReader
@@ -21,11 +21,13 @@ def home():
 
 @app.route("/robots.txt")
 def robots_txt():
-    return """User-agent: *
+    robots = """User-agent: *
 Allow: /
 
 Sitemap: https://nextoolia.com/sitemap.xml
 """
+    return Response(robots, mimetype="text/plain")
+
 
 @app.route("/sitemap.xml")
 def sitemap_xml():
@@ -37,7 +39,7 @@ def sitemap_xml():
     </url>
 
     <url>
-    <loc>https://nextoolia.com/pdf-to-word</loc>
+        <loc>https://nextoolia.com/pdf-to-word</loc>
     </url>
 
     <url>
@@ -393,6 +395,3 @@ if __name__ == "__main__":
         host="0.0.0.0",
         port=int(os.environ.get("PORT", 5000))
     )
-
-
-
