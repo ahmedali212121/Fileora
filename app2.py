@@ -29,6 +29,13 @@ Sitemap: https://nextoolia.com/sitemap.xml
     return Response(robots, mimetype="text/plain")
 
 
+@app.route("/ads.txt")
+def ads_txt():
+    return Response(
+        "google.com, pub-5639157645003629, DIRECT, f08c47fec0942fa0\n",
+        mimetype="text/plain"
+    )
+
 @app.route("/sitemap.xml")
 def sitemap_xml():
     content = """<?xml version="1.0" encoding="UTF-8"?>
